@@ -4,33 +4,42 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public int Health;
-    private int someForce;
-    public int Damage;
+    public int health;
+    private int speed = 50;
+    public int damage;
+
+    ControlText TextHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        someForce = 50;
-        //GameObject Child = transform.GetChild(0).gameObject;
-        //Child.GetComponent<Rigidbody2D>().AddForce(someForce * transform.right * Time.deltaTime);
+        TextHolder = GameObject.Find("MainCanvas/TextHolder").GetComponent<ControlText>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * someForce * Time.deltaTime);
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
-    public void TakeDamage(int Damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log("Enemy taking damage!");
-        Health = Health - Damage;
+        //Debug.Log("Enemy taking damage!");
+        health = health - damage;
 
-        if (Health <= 0)
+        if (health <= 0)
         {
-            Destroy(gameObject);
+            Death();
         }
+    }
+
+    void Death()
+    {
+        float itemRarityNumber = Random.Range(0.0f, 100.0f);
+        TextHolder.ChangeValues(itemRarityNumber);
+        
+
+        Destroy(gameObject);
     }
 
 }

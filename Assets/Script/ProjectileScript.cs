@@ -30,10 +30,16 @@ public class ProjectileScript : MonoBehaviour
             parentScript.TakeDamage(Damage);
             Destroy(gameObject);
         }
+        else if (collision.CompareTag("Barrier"))
+        {
+            Debug.Log("Projectile off the screen");
+            Destroy(gameObject);
+        }
     }
-
+    /*
     void OnBecameInvisible()
     {
+        Debug.Log("Projectile off the screen");
         Destroy(gameObject);
-    }
+    }*/
 }
