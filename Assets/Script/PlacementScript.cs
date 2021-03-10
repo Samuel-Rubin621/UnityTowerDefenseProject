@@ -4,47 +4,40 @@ using UnityEngine;
 
 public class PlacementScript : MonoBehaviour
 {
-    private GameObject Canvas;
+    //Variables local variables for the script
+    private bool bHasTower;
+
+    //Reference variables
     private CanvasScript canvasScript;
+    public GameObject TowerInPosition;
+
+    /*****************************************************************************/
+    //Variables for creating the purchase menu
+    [SerializeField] private GameObject purchaseMenuPrefab;
+    private PurchaseMenuScript purchaseMenuScript;
+
+    //Variables for creating the tower menu
+    [SerializeField] private GameObject towerMenuPrefab;
+    private TowerMenuScript towerMenuScript;
+    /*****************************************************************************/
 
     // Start is called before the first frame update
     void Start()
     {
-        Canvas = GameObject.Find("MainCanvas");
-        canvasScript = Canvas.GetComponent<CanvasScript>();
+        canvasScript = GameObject.Find("MainCanvas").GetComponent<CanvasScript>();
+        bHasTower = false;
     }
-
-    private bool CanPlaceTower()
-    {
-        if (Tower == null) return true;
-        else return false;
-    }
-
-    public GameObject purchaseMenuPrefab;
-    private PurchaseMenuScript purchaseMenuScript;
-
-    public GameObject towerMenuPrefab;
-    private TowerMenuScript towerMenuScript;
 
     public void CreateUI()
     {
-        if (CanPlaceTower())
-        {
-            canvasScript.CreateMenu(purchaseMenuPrefab, purchaseMenuScript, this.name);
-        }
-        else
-        {
-            canvasScript.CreateMenu(towerMenuPrefab, towerMenuScript, this.name);
-        }
+        //If statement to determine which version of CreateMenu() to call in the canvas
+        if (!bHasTower) { canvasScript.CreateMenu(purchaseMenuPrefab, purchaseMenuScript, this.name); }
+        else { canvasScript.CreateMenu(towerMenuPrefab, towerMenuScript, this.name); }
     }
-
-    private GameObject TowerPrefab;
-    private GameObject Tower;
 
     public void BuildTower(GameObject TowerToBuild)
     {
-        TowerPrefab = TowerToBuild;
-        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
-        Tower = (GameObject)Instantiate(TowerPrefab, this.transform);
+        TowerInPosition = Instantiate(TowerToBuild, this.transform);
+        bHasTower = true;
     }
 }
