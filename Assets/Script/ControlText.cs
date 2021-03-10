@@ -26,13 +26,13 @@ public class ControlText : MonoBehaviour
     void Start()
     {
         //Debugging functionality
-        NoSpawn = GameObject.Find("MainCanvas/TextHolder/NoSpawn").GetComponent<Text>();
-        Common = GameObject.Find("MainCanvas/TextHolder/Common").GetComponent<Text>();
-        Uncommon = GameObject.Find("MainCanvas/TextHolder/Uncommon").GetComponent<Text>();
-        Rare = GameObject.Find("MainCanvas/TextHolder/Rare").GetComponent<Text>();
-        Exotic = GameObject.Find("MainCanvas/TextHolder/Exotic").GetComponent<Text>();
-        Legendary = GameObject.Find("MainCanvas/TextHolder/Legendary").GetComponent<Text>();
-        ERROR = GameObject.Find("MainCanvas/TextHolder/ERROR").GetComponent<Text>();
+        NoSpawn = GameObject.Find("Overlay/OverlayHolder/TextHolder/NoSpawn").GetComponent<Text>();
+        Common = GameObject.Find("Overlay/OverlayHolder/TextHolder/Common").GetComponent<Text>();
+        Uncommon = GameObject.Find("Overlay/OverlayHolder/TextHolder/Uncommon").GetComponent<Text>();
+        Rare = GameObject.Find("Overlay/OverlayHolder/TextHolder/Rare").GetComponent<Text>();
+        Exotic = GameObject.Find("Overlay/OverlayHolder/TextHolder/Exotic").GetComponent<Text>();
+        Legendary = GameObject.Find("Overlay/OverlayHolder/TextHolder/Legendary").GetComponent<Text>();
+        ERROR = GameObject.Find("Overlay/OverlayHolder/TextHolder/ERROR").GetComponent<Text>();
 
         NoSpawnCount = 0;
         CommonCount = 0;

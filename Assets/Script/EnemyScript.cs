@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TextHolder = GameObject.Find("MainCanvas/TextHolder").GetComponent<ControlText>();
+        TextHolder = GameObject.Find("Overlay/OverlayHolder/TextHolder").GetComponent<ControlText>();
     }
 
     // Update is called once per frame
