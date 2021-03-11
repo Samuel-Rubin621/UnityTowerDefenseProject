@@ -9,12 +9,14 @@ public class Overlay : MonoBehaviour
     public bool bBuyingTower;
     private int playerMoney;
     private int playerLives;
+    public int towerCost;
     private GameObject dummyTower;
     private Button cancelButton;
 
     //Text variables
     private Text Lives;
     private Text Money;
+    private Text TowerCost;
 
     //Variable reference to objects
     public GameObject Tower;
@@ -26,9 +28,11 @@ public class Overlay : MonoBehaviour
         bBuyingTower = false;
         playerLives = 100;
         playerMoney = 500;
+        towerCost = 150;
 
         Lives = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
         Money = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
+        TowerCost = GameObject.Find("Overlay/OverlayHolder/BuyButton/BuyButtonText").GetComponent<Text>();
         UpdateText();
 
         _camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -36,12 +40,8 @@ public class Overlay : MonoBehaviour
         cancelButton.interactable = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    #region UI
+    // Methods for the UI buttons on screen
     public void BuyButton()
     {
         if (!bBuyingTower)
@@ -74,6 +74,16 @@ public class Overlay : MonoBehaviour
         else { cancelButton.interactable = false; }
     }
 
+    private void UpdateText()
+    {
+        Lives.text = "Lives: " + playerLives.ToString();
+        Money.text = "Money: " + playerMoney.ToString();
+        TowerCost.text = "Buy Tower: " + towerCost.ToString();
+    }
+    #endregion
+
+    #region Money and Lives
+    // Methods for changing values for money and lives
     public void IncreaseMoney(int moneyToAdd)
     {
         playerMoney += moneyToAdd;
@@ -97,12 +107,20 @@ public class Overlay : MonoBehaviour
         playerLives -= livesToSubtract;
         UpdateText();
     }
+    #endregion
 
-    private void UpdateText()
+    #region Tower Creation
+    // Mothods used when creating new towers to validate placement
+    public void IncreaseTowerCost()
     {
-        Lives.text = "Lives: " + playerLives.ToString();
-        Money.text = "Money: " + playerMoney.ToString();
+        towerCost = (int)Mathf.Pow(towerCost, 1.025f);
+        UpdateText();
     }
 
-
+    public bool CheckMoney()
+    {
+        if (playerMoney >= towerCost) return true;
+        else return false;
+    }
+    #endregion
 }

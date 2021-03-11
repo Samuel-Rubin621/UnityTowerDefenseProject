@@ -25,18 +25,12 @@ public class TowerPlacement : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (overlay.bBuyingTower && !bTowerPlaced)
+        if (overlay.bBuyingTower && !bTowerPlaced && overlay.CheckMoney())
         {
             bTowerPlaced = true;
             builtTower = Instantiate(Tower, this.transform);
+            overlay.DecreaseMoney(overlay.towerCost);
+            overlay.IncreaseTowerCost();
         }
     }
-
-    void OnMouseOver()
-    {
-
-    }
-
-
-
 }

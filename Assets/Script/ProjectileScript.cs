@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    private int someForce;
+    [SerializeField] private int projectileSpeed;
     public int Damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        someForce = 500;
-        //GameObject Child = transform.GetChild(0).gameObject;
-        //this.GetComponent<Rigidbody2D>().AddForce(someForce * transform.right * Time.deltaTime);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * someForce * Time.deltaTime);
+        transform.Translate(Vector3.right * projectileSpeed * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -32,7 +30,6 @@ public class ProjectileScript : MonoBehaviour
         }
         else if (collision.CompareTag("Barrier"))
         {
-            Debug.Log("Projectile off the screen");
             Destroy(gameObject);
         }
     }

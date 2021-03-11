@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public int health;
-    private int speed = 50;
-    public int damage;
+    // Private variables that are changable in the editor
+    [SerializeField] private int enemyStrength;
+    [SerializeField] private int enemyHealth;
+    [SerializeField] private int enemyDamage;
+    [SerializeField] private int enemySpeed;
 
-    ControlText TextHolder;
+    // Private variables only changeable through script
+
+
+    // Reference variables
+    private ControlText TextHolder;
 
     // Start is called before the first frame update
     void Start()
@@ -19,15 +25,14 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        transform.Translate(Vector3.left * enemySpeed * Time.deltaTime);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int incomingDamage)
     {
-        //Debug.Log("Enemy taking damage!");
-        health = health - damage;
+        enemyHealth = enemyHealth - incomingDamage;
 
-        if (health <= 0)
+        if (enemyHealth <= 0)
         {
             Death();
         }
@@ -37,9 +42,17 @@ public class EnemyScript : MonoBehaviour
     {
         float itemRarityNumber = Random.Range(0.0f, 100.0f);
         TextHolder.ChangeValues(itemRarityNumber);
-        
+
 
         Destroy(gameObject);
     }
 
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        Debug.Log("Collided");
+        if (collider.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(collider.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
 }
