@@ -47,12 +47,4 @@ public class EnemyScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collider)
-    {
-        Debug.Log("Collided");
-        if (collider.gameObject.tag == "Enemy")
-        {
-            Physics2D.IgnoreCollision(collider.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
-    }
 }
