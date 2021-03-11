@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3329500190849563813}
+  - component: {fileID: 5247159597337877675}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5247159597337877675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421194404356174575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d222aba5e7468f743922a8f5384a8a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy1: {fileID: 638931607951271430, guid: 460541d279efc4e4fbdd8a0440abb14b, type: 3}
+  Enemy2: {fileID: 638931607951271430, guid: b489ca4cd94677348a4ff52ea4213389, type: 3}
+  Enemy3: {fileID: 638931607951271430, guid: 3d168749f2ca91b4284013559be8a2f1, type: 3}
+  Enemy4: {fileID: 638931607951271430, guid: 8dfc64ff26bf14c488cd798c1f6b4741, type: 3}
 --- !u!1 &8887625017026786021
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +58,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8887625017026786018}
   - component: {fileID: 8887625017026786019}
-  - component: {fileID: 8887625017026786020}
   m_Layer: 0
   m_Name: EnemySpawnerSprite
   m_TagString: Untagged
@@ -113,17 +129,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8887625017026786020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8887625017026786021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d222aba5e7468f743922a8f5384a8a18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 638931607951271430, guid: 460541d279efc4e4fbdd8a0440abb14b,
-    type: 3}

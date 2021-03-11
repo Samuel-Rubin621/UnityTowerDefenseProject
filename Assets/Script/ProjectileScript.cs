@@ -36,10 +36,5 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    /*
-    void OnBecameInvisible()
-    {
-        Debug.Log("Projectile off the screen");
-        Destroy(gameObject);
-    }*/
+
 }
