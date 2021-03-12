@@ -14,6 +14,7 @@ public class TowerPlacement : MonoBehaviour
 
     // Reference variables
     private Overlay overlay;
+    private RoundSpawning roundSpawning;
 
     // Prefab variables
     [SerializeField] private GameObject Tower;
@@ -22,6 +23,7 @@ public class TowerPlacement : MonoBehaviour
     void Start()
     {
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
+        roundSpawning = GameObject.Find("Overlay").GetComponent<RoundSpawning>();
         bTowerPlaced = false;
     }
 
@@ -37,6 +39,7 @@ public class TowerPlacement : MonoBehaviour
         {
             bTowerPlaced = true;
             builtTower = Instantiate(Tower, this.transform);
+            roundSpawning.AddTowerToList(builtTower);
             overlay.DecreaseMoney(overlay.towerCost);
             overlay.IncreaseTowerCost();
         }

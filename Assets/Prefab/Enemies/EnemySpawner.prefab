@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d222aba5e7468f743922a8f5384a8a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy1: {fileID: 638931607951271430, guid: 460541d279efc4e4fbdd8a0440abb14b, type: 3}
-  Enemy2: {fileID: 638931607951271430, guid: b489ca4cd94677348a4ff52ea4213389, type: 3}
-  Enemy3: {fileID: 638931607951271430, guid: 3d168749f2ca91b4284013559be8a2f1, type: 3}
-  Enemy4: {fileID: 638931607951271430, guid: 8dfc64ff26bf14c488cd798c1f6b4741, type: 3}
+  Enemy1: {fileID: 638931607951271430, guid: e4bd5d6d13edaf14495047ed2cfd82f8, type: 3}
+  Enemy2: {fileID: 638931607951271430, guid: d3e25e71622c2ac4c87494520efbb858, type: 3}
+  Enemy3: {fileID: 638931607951271430, guid: c6256b3e225bba74b91b7e0c0f22bf64, type: 3}
+  Enemy4: {fileID: 638931607951271430, guid: c69816014b5eaa645aedb82d4ff04203, type: 3}
 --- !u!1 &8887625017026786021
 GameObject:
   m_ObjectHideFlags: 0

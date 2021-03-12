@@ -63,7 +63,16 @@ public class EnemyScript : MonoBehaviour
 
     public void AttackTower()
     {
+        Debug.Log("Attacking tower");
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Tower"))
+        {
+            Debug.Log("Colliding with tower");
+            AttackTower();
+        }
     }
 
 
