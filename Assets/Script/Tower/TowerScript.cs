@@ -11,14 +11,34 @@ public class TowerLevel
 
 public class TowerScript : MonoBehaviour
 {
-    public List<TowerLevel> levels;
-    private GameObject ProjectileSpawn;
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
+    private GameObject projectileSpawn;
+    private float health;
+    private float projectileDamage;
+    private float fireRate;
+    private float projectileSpeed;
+    private float defense;
+
+    // Public variables
+
+    // Reference variables
+
+    // Prefab variables
+    [SerializeField] GameObject projectile;
 
     // Start is called before the first frame update
     void Start()
     {
-        ProjectileSpawn = transform.GetChild(1).gameObject;
-        InvokeRepeating("Attack", 2.0f, 1.0f);
+        health = 50.0f;
+        projectileDamage = 1.0f;
+        fireRate = 1.5f;
+        projectileSpeed = 500.0f;
+        defense = 0.0f;
+
+        projectileSpawn = transform.GetChild(1).gameObject;
+        InvokeRepeating("FireProjectile", 1.0f, fireRate);
     }
 
     // Update is called once per frame
@@ -32,10 +52,29 @@ public class TowerScript : MonoBehaviour
         Debug.Log("Tower selected");
     }
 
-    public GameObject ProjectilePrefab;
-
-    void Attack()
+    void FireProjectile()
     {
-        GameObject Projectile = Instantiate(ProjectilePrefab, ProjectileSpawn.transform);
+        GameObject Projectile = Instantiate(projectile, projectileSpawn.transform);
+        Projectile.GetComponent<ProjectileScript>().projectileSpeed = projectileSpeed;
+        Projectile.GetComponent<ProjectileScript>().projectileDamage = projectileDamage;
+    }
+
+    void TakeDamage(float value)
+    {
+        health -= value;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            EnemyScript collidingEnemy = collision.GetComponent<EnemyScript>();
+            collidingEnemy.AttackTower();
+        }
     }
 }

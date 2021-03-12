@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class EnemySpawnerScript : MonoBehaviour
 {
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
+    private float spawnRate;
+
+    // Public variables
+
+    // Reference variables
+
+    // Prefab variables
+
     // Enemy variation prefabs
     [SerializeField] private GameObject Enemy1;
     [SerializeField] private GameObject Enemy2;
@@ -21,20 +32,10 @@ public class EnemySpawnerScript : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {/*
-        enemyStrength1 = Enemy1.GetComponent<EnemyScript>().enemyStrength;
-        enemyStrength2 = Enemy2.GetComponent<EnemyScript>().enemyStrength;
-        enemyStrength3 = Enemy3.GetComponent<EnemyScript>().enemyStrength;
-        enemyStrength4 = Enemy4.GetComponent<EnemyScript>().enemyStrength;
-        */
-        overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-        InvokeRepeating("Spawn", 5.0f, 1.0f);
-    }
-
-    // Update is called once per frame
-    void Update()
     {
-        
+        spawnRate = 1.5f;
+        overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
+        InvokeRepeating("Spawn", 5.0f, spawnRate);
     }
 
     void Spawn()

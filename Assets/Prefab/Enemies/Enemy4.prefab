@@ -48,6 +48,7 @@ MonoBehaviour:
   enemyHealth: 15
   enemyDamage: 0
   enemySpeed: 50
+  enemyValue: 40
 --- !u!1 &638931608813911960
 GameObject:
   m_ObjectHideFlags: 0

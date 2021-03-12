@@ -5,6 +5,16 @@ using UnityEngine.UI;
 
 public class ControlText : MonoBehaviour
 {
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
+
+    // Public variables
+
+    // Reference variables
+
+    // Prefab variables
+
     //Debugging variables
     private Text NoSpawn;
     private Text Common;

@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    [SerializeField] private int projectileSpeed;
-    public int Damage;
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
+
+    // Public variables
+    public float projectileSpeed;
+    public float projectileDamage;
+
+    // Reference variables
+    public GameObject tower;
+
+    // Prefab variables
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +35,7 @@ public class ProjectileScript : MonoBehaviour
         {
             GameObject Parent = collision.transform.parent.gameObject;
             EnemyScript parentScript = Parent.GetComponent<EnemyScript>();
-            parentScript.TakeDamage(Damage);
+            parentScript.TakeDamage(projectileDamage);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Barrier"))
@@ -33,5 +43,4 @@ public class ProjectileScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

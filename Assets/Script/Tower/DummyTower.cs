@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class DummyTower : MonoBehaviour
 {
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
     private Vector3 mousePosition;
-    public float moveSpeed = 0.1f;
+    private float moveSpeed = 0.1f;
+
+    // Public variables
+
+    // Reference variables
     private Camera _camera;
+
+    // Prefab variables
 
     // Start is called before the first frame update
     void Start()

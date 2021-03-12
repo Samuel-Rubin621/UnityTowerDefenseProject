@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class TowerPlacement : MonoBehaviour
 {
-    private Overlay overlay;
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
     private bool bTowerPlaced;
     private GameObject builtTower;
 
+    // Public variables
+
+    // Reference variables
+    private Overlay overlay;
+
+    // Prefab variables
     [SerializeField] private GameObject Tower;
 
     // Start is called before the first frame update

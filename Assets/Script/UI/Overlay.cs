@@ -5,22 +5,28 @@ using UnityEngine.UI;
 
 public class Overlay : MonoBehaviour
 {
-    //Class variables
-    public bool bBuyingTower;
+    // Private variables that are changable in the editor
+
+    // Private variables only changeable through script
     private int playerMoney;
     private int playerLives;
-    public int towerCost;
     private GameObject dummyTower;
     private Button cancelButton;
+
+    // Public variables
+    public int towerCost;
+    public bool bBuyingTower;
+
+    // Reference variables
+    public GameObject Tower;
+    private Camera _camera;
+
+    // Prefab variables
 
     //Text variables
     private Text Lives;
     private Text Money;
     private Text TowerCost;
-
-    //Variable reference to objects
-    public GameObject Tower;
-    private Camera _camera;
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +34,15 @@ public class Overlay : MonoBehaviour
         bBuyingTower = false;
         playerLives = 100;
         playerMoney = 500;
-        towerCost = 150;
+        towerCost = 100;
 
         Lives = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
         Money = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
-        TowerCost = GameObject.Find("Overlay/OverlayHolder/BuyButton/BuyButtonText").GetComponent<Text>();
+        TowerCost = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton/BuyButtonText").GetComponent<Text>();
         UpdateText();
 
         _camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        cancelButton = GameObject.Find("Overlay/OverlayHolder/CancelButton").GetComponent<Button>();
+        cancelButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/CancelButton").GetComponent<Button>();
         cancelButton.interactable = false;
     }
 
@@ -61,7 +67,6 @@ public class Overlay : MonoBehaviour
         if (bBuyingTower)
         {
             bBuyingTower = false;
-            Debug.Log("Canceling");
             Destroy(dummyTower);
 
             ToggleCancelButton();
@@ -113,7 +118,13 @@ public class Overlay : MonoBehaviour
     // Mothods used when creating new towers to validate placement
     public void IncreaseTowerCost()
     {
-        towerCost = (int)Mathf.Pow(towerCost, 1.025f);
+        towerCost = (int)(towerCost * 1.2);
+        UpdateText();
+    }
+
+    public void DecreaseTowerCost()
+    {
+        towerCost = (int)(towerCost * 0.95);
         UpdateText();
     }
 
