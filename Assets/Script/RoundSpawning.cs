@@ -9,8 +9,9 @@ public class RoundSpawning : MonoBehaviour
 
     // Private variables only changeable through script
     private int round;
-    private int roundDifficultyBudget;
+    private int roundBudget;
     private List<GameObject> towerList = new List<GameObject>();
+    private GameObject[] enemySpawners;
     private Button startRoundButton;
 
     // Public variables
@@ -28,8 +29,10 @@ public class RoundSpawning : MonoBehaviour
         startRoundButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/StartRoundButton").GetComponent<Button>();
         startRoundButton.interactable = true;
 
+        enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+
         round = 1;
-        roundDifficultyBudget = 100;
+        roundBudget = 5;
     }
 
     // Update is called once per frame
@@ -51,6 +54,10 @@ public class RoundSpawning : MonoBehaviour
         bInRound = true;
         startRoundButton.interactable = false;
 
+        foreach (GameObject spawner in enemySpawners)
+        {
+            spawner.GetComponent<EnemySpawnerScript>().RoundStart();
+        }
 
         foreach (GameObject tower in towerList)
         {
@@ -59,15 +66,15 @@ public class RoundSpawning : MonoBehaviour
 
     }
 
-    void IncreaseRound()
+    private void IncreaseRound()
     {
         round++;
-        roundDifficultyBudget = (int)(roundDifficultyBudget * 1.1);
+        roundBudget = (int)(roundBudget * 1.1);
     }
 
-    public int GetDifficulty()
+    public int GetRoundBudget()
     {
-        return roundDifficultyBudget;
+        return roundBudget;
     }
 
 

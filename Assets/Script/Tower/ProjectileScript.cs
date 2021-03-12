@@ -33,9 +33,7 @@ public class ProjectileScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            GameObject Parent = collision.transform.parent.gameObject;
-            EnemyScript parentScript = Parent.GetComponent<EnemyScript>();
-            parentScript.TakeDamage(projectileDamage);
+            collision.GetComponent<EnemyScript>().TakeDamage(projectileDamage);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Barrier"))

@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Enemy1: {fileID: 638931607951271430, guid: e4bd5d6d13edaf14495047ed2cfd82f8, type: 3}
-  - Enemy2: {fileID: 638931607951271430, guid: d3e25e71622c2ac4c87494520efbb858, type: 3}
-  - Enemy3: {fileID: 638931607951271430, guid: c6256b3e225bba74b91b7e0c0f22bf64, type: 3}
+  - Enemy1: {fileID: 638931607951271430, guid: abe041ff8b4e5f54799c87e068e9c63a, type: 3}
+  - Enemy2: {fileID: 638931607951271430, guid: 58d523cf9951b5843b43eadbc4a7ae43, type: 3}
+  - Enemy3: {fileID: 638931607951271430, guid: 3fa6f608a8316bf4bb2fd47a506cdc32, type: 3}
   - Enemy4: {fileID: 638931607951271430, guid: c69816014b5eaa645aedb82d4ff04203, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

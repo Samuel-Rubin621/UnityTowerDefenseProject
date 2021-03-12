@@ -9,6 +9,7 @@ TagManager:
   - Barrier
   - Projectile
   - Tower
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

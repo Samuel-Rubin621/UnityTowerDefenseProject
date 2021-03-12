@@ -5,11 +5,11 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     // Private variables that are changable in the editor
-    [SerializeField] private float enemyStrength;
     [SerializeField] private float enemyHealth;
     [SerializeField] private float enemyDamage;
     [SerializeField] private float enemySpeed;
     [SerializeField] private int enemyValue;
+    [SerializeField] private int enemyStrength;
 
     // Private variables only changeable through script
     private bool bAttacking;
@@ -74,6 +74,13 @@ public class EnemyScript : MonoBehaviour
             AttackTower();
         }
     }
+
+    public int GetStrength()
+    {
+        return enemyStrength;
+    }
+
+
 
 
 }
