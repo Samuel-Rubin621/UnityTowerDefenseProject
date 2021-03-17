@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour
     private bool bAttacking;
 
     // Public variables
+    public EnemySpawnerScript parentSpawner;
 
     // Reference variables
     private ControlText TextHolder;
@@ -25,6 +26,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        parentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawnerScript>();
         bAttacking = false;
 
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
@@ -55,6 +57,8 @@ public class EnemyScript : MonoBehaviour
 
     private void Death()
     {
+        parentSpawner.RemoveSpawnedEnemy(gameObject);
+
         float itemRarityNumber = Random.Range(0.0f, 100.0f);
         TextHolder.ChangeValues(itemRarityNumber);
 

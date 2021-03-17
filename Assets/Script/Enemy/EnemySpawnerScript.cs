@@ -8,12 +8,14 @@ public class EnemySpawnerScript : MonoBehaviour
 
     // Private variables only changeable through script
     private float spawnRate;
-    private int roundBudget;
+    private float roundBudget;
     private int lowestEnemyStrength;
     private List<int> enemyStrengths = new List<int>();
-    private List<GameObject> enemiesToSpawn = new List<GameObject>();
+    public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
     // Public variables
+    public bool bDoneSpawning;
+    public List<GameObject> enemiesSpawned = new List<GameObject>();
 
     // Reference variables
 
@@ -51,14 +53,17 @@ public class EnemySpawnerScript : MonoBehaviour
             }
 
         }
-        Debug.Log(lowestEnemyStrength.ToString());
         Invoke("PreloadRound", 0.1f);
+    }
+
+    void Update()
+    {
+
     }
 
     private void PreloadRound()
     {
-        roundBudget = roundSpawning.GetRoundBudget();
-        Debug.Log("beginning preload    " + roundBudget.ToString());
+        roundBudget = roundSpawning.roundBudget;
         while (roundBudget > lowestEnemyStrength)
         {
             float randomEnemy = Random.Range(0.0f, 100.0f);
@@ -84,22 +89,42 @@ public class EnemySpawnerScript : MonoBehaviour
                 roundBudget -= enemyStrengths[3];
             }
         }
-        Debug.Log("done preloading");
     }
 
     public void RoundStart()
     {
+        bDoneSpawning = false;
         Spawn();
     }
 
     void Spawn()
     {
-        Debug.Log(enemiesToSpawn.Count.ToString());
+        GameObject enemy = Instantiate(enemiesToSpawn[0], this.transform);
+        enemiesSpawned.Add(enemy);
+        enemiesToSpawn.RemoveAt(0);
         if (enemiesToSpawn.Count > 0)
         {
-            Instantiate(enemiesToSpawn[0], this.transform);
-            enemiesToSpawn.RemoveAt(0);
             Invoke("Spawn", spawnRate);
         }
+        else
+        {
+            bDoneSpawning = true;
+            PreloadRound();
+        }
     }
+
+    public void RemoveSpawnedEnemy(GameObject enemyToRemove)
+    {
+        enemiesSpawned.Remove(enemyToRemove);
+        Debug.Log("Removed enemy\nbDoneSpawning: " +bDoneSpawning.ToString() + 
+            "\nEnemiesSpawned: " + enemiesSpawned.Count.ToString() + 
+            "\nEnemiesToSpawn: " + enemiesToSpawn.Count.ToString());
+
+        if (bDoneSpawning && enemiesSpawned.Count <= 0)
+        {
+            roundSpawning.CheckRoundCompletion(gameObject);
+        }
+    }
+
+
 }

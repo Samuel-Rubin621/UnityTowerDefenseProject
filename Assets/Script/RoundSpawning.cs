@@ -3,44 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct EnemySpawnerStruct
+{
+    public GameObject spawner;
+    public bool bAllEnemiesDead;
+
+    public EnemySpawnerStruct(GameObject spawnerToAdd, bool bAreEnemiesDead)
+    {
+        this.spawner = spawnerToAdd;
+        this.bAllEnemiesDead = bAreEnemiesDead;
+    }
+}
+
 public class RoundSpawning : MonoBehaviour
 {
+    #region Variables
     // Private variables that are changable in the editor
 
     // Private variables only changeable through script
     private int round;
-    private int roundBudget;
     private List<GameObject> towerList = new List<GameObject>();
-    private GameObject[] enemySpawners;
+    private List<EnemySpawnerStruct> enemySpawnersList = new List<EnemySpawnerStruct>();
     private Button startRoundButton;
+    private Text startRoundButtonText;
 
     // Public variables
     public bool bInRound;
+    public float roundBudget;
 
     // Reference variables
     private Overlay overlay;
 
     // Prefab variables
 
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
+        // Set References
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
         startRoundButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/StartRoundButton").GetComponent<Button>();
+        startRoundButtonText = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/StartRoundButton/StartRoundButtonText").GetComponent<Text>();
         startRoundButton.interactable = true;
 
-        enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        // Set up the spawners
+        SetupSpawnerReference();
 
+        // Set up starting values
         round = 1;
-        roundBudget = 5;
+        roundBudget = 5.0f;
+        startRoundButtonText.text = "Start Round " + round.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetupSpawnerReference()
     {
-        if (bInRound)
+        foreach (GameObject spawner in GameObject.FindGameObjectsWithTag("EnemySpawner"))
         {
-
+            enemySpawnersList.Add(new EnemySpawnerStruct(spawner, false));
         }
     }
 
@@ -54,9 +75,9 @@ public class RoundSpawning : MonoBehaviour
         bInRound = true;
         startRoundButton.interactable = false;
 
-        foreach (GameObject spawner in enemySpawners)
+        for (int i = 0; i < enemySpawnersList.Count; i++)
         {
-            spawner.GetComponent<EnemySpawnerScript>().RoundStart();
+            enemySpawnersList[i].spawner.GetComponent<EnemySpawnerScript>().RoundStart();
         }
 
         foreach (GameObject tower in towerList)
@@ -69,15 +90,36 @@ public class RoundSpawning : MonoBehaviour
     private void IncreaseRound()
     {
         round++;
-        roundBudget = (int)(roundBudget * 1.1);
+        roundBudget = roundBudget * 1.2f;
+        startRoundButton.interactable = true;
+        enemySpawnersList.Clear();
+        SetupSpawnerReference();
+        startRoundButtonText.text = "Start Round " + round.ToString();
     }
 
-    public int GetRoundBudget()
+    public void CheckRoundCompletion(GameObject spawnerToChange)
     {
-        return roundBudget;
+        //Debug.Log("Checking Round completion " + spawnerToChange.ToString());
+        EnemySpawnerStruct tempHolder = new EnemySpawnerStruct(spawnerToChange, true);
+        int i = 0;
+        foreach(var s in enemySpawnersList)
+        {
+            if (s.spawner == spawnerToChange)
+            {
+                break;
+            }
+            i++;
+        }
+
+        enemySpawnersList[i] = tempHolder;
+
+        for (int j = 0; j < enemySpawnersList.Count; j++)
+        {
+            if (enemySpawnersList[j].bAllEnemiesDead == false) return;
+        }
+        bInRound = false;
+        IncreaseRound();
     }
-
-
 
 
 
