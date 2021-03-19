@@ -30,7 +30,7 @@ public class RoundSpawning : MonoBehaviour
 
     // Public variables
     public bool bInRound;
-    public float roundBudget;
+    public int roundBudget;
 
     // Reference variables
     private Overlay overlay;
@@ -53,7 +53,7 @@ public class RoundSpawning : MonoBehaviour
 
         // Set up starting values
         round = 1;
-        roundBudget = 5.0f;
+        roundBudget = 10;
         startRoundButtonText.text = "Start Round " + round.ToString();
     }
 
@@ -77,20 +77,20 @@ public class RoundSpawning : MonoBehaviour
 
         for (int i = 0; i < enemySpawnersList.Count; i++)
         {
-            enemySpawnersList[i].spawner.GetComponent<EnemySpawnerScript>().RoundStart();
+            enemySpawnersList[i].spawner.GetComponent<EnemySpawner>().RoundStart();
         }
 
         foreach (GameObject tower in towerList)
         {
-            tower.GetComponent<TowerScript>().RoundStart();
+            tower.GetComponent<Tower>().RoundStart();
         }
+        roundBudget = (int)(roundBudget * 1.1);
 
     }
 
     private void IncreaseRound()
     {
         round++;
-        roundBudget = roundBudget * 1.2f;
         startRoundButton.interactable = true;
         enemySpawnersList.Clear();
         SetupSpawnerReference();
@@ -99,7 +99,6 @@ public class RoundSpawning : MonoBehaviour
 
     public void CheckRoundCompletion(GameObject spawnerToChange)
     {
-        //Debug.Log("Checking Round completion " + spawnerToChange.ToString());
         EnemySpawnerStruct tempHolder = new EnemySpawnerStruct(spawnerToChange, true);
         int i = 0;
         foreach(var s in enemySpawnersList)

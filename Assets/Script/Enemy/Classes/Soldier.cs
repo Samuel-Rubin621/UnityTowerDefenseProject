@@ -2,31 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class Soldier : DefaultEnemy
 {
     // Private variables that are changable in the editor
-    [SerializeField] private float enemyHealth;
-    [SerializeField] private float enemyDamage;
-    [SerializeField] private float enemySpeed;
-    [SerializeField] private int enemyValue;
-    [SerializeField] private int enemyStrength;
 
     // Private variables only changeable through script
+    private float enemyHealth = 1.0f;
+    private float enemyDamage = 1.0f;
+    private float enemySpeed = 50.0f;
+    private int enemyValue = 1;
+    private int enemyStrength = 1;
     private bool bAttacking;
+    private EnemySpawner parentSpawner;
 
     // Public variables
-    public EnemySpawnerScript parentSpawner;
+
 
     // Reference variables
     private ControlText TextHolder;
     private Overlay overlay;
+    private MonoBehaviour rankScript;
 
     // Prefab variables
 
     // Start is called before the first frame update
     void Start()
     {
-        parentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawnerScript>();
+        parentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawner>();
         bAttacking = false;
 
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
@@ -82,6 +84,11 @@ public class EnemyScript : MonoBehaviour
     public int GetStrength()
     {
         return enemyStrength;
+    }
+
+    public void RemoveFromSpawner(GameObject enemyToRemvoe)
+    {
+        parentSpawner.RemoveSpawnedEnemy(enemyToRemvoe);
     }
 
 

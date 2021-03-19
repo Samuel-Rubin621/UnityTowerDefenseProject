@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerScript : MonoBehaviour
+public class Tower : MonoBehaviour
 {
     // Private variables that are changable in the editor
 
@@ -63,8 +63,8 @@ public class TowerScript : MonoBehaviour
     void FireProjectile()
     {
         GameObject Projectile = Instantiate(projectile, projectileSpawn.transform);
-        Projectile.GetComponent<ProjectileScript>().projectileSpeed = projectileSpeed;
-        Projectile.GetComponent<ProjectileScript>().projectileDamage = projectileDamage;
+        Projectile.GetComponent<Projectile>().projectileSpeed = projectileSpeed;
+        Projectile.GetComponent<Projectile>().projectileDamage = projectileDamage;
     }
 
     void TakeDamage(float value)

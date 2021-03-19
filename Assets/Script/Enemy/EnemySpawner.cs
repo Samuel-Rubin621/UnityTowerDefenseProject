@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnerScript : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     // Private variables that are changable in the editor
 
     // Private variables only changeable through script
     private float spawnRate;
-    private float roundBudget;
+    private int roundBudget;
     private int lowestEnemyStrength;
-    private List<int> enemyStrengths = new List<int>();
     public List<GameObject> enemiesToSpawn = new List<GameObject>();
 
     // Public variables
@@ -22,10 +21,16 @@ public class EnemySpawnerScript : MonoBehaviour
     // Prefab variables
 
     // Enemy variation prefabs
-    [SerializeField] private GameObject Enemy1;
-    [SerializeField] private GameObject Enemy2;
-    [SerializeField] private GameObject Enemy3;
-    [SerializeField] private GameObject Enemy4;
+    [SerializeField] private GameObject Soldier;
+    [SerializeField] private GameObject Corporal;
+    [SerializeField] private GameObject Sergeant;
+    [SerializeField] private GameObject Lieutenant;
+    [SerializeField] private GameObject Colonel;
+    [SerializeField] private GameObject General;
+    [SerializeField] private GameObject Great_General;
+    [SerializeField] private GameObject Master_General;
+
+
 
     // Reference variables
     private Overlay overlay;
@@ -38,21 +43,7 @@ public class EnemySpawnerScript : MonoBehaviour
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
         roundSpawning = GameObject.Find("Overlay").GetComponent<RoundSpawning>();
 
-        lowestEnemyStrength = 1000;
-
-        enemyStrengths.Add(Enemy1.GetComponent<EnemyScript>().GetStrength());
-        enemyStrengths.Add(Enemy2.GetComponent<EnemyScript>().GetStrength());
-        enemyStrengths.Add(Enemy3.GetComponent<EnemyScript>().GetStrength());
-        enemyStrengths.Add(Enemy4.GetComponent<EnemyScript>().GetStrength());
-
-        foreach (int strength in enemyStrengths)
-        {
-            if (strength < lowestEnemyStrength)
-            {
-                lowestEnemyStrength = strength;
-            }
-
-        }
+        lowestEnemyStrength = Soldier.GetComponent<Soldier>().GetStrength();
         Invoke("PreloadRound", 0.1f);
     }
 
@@ -60,33 +51,34 @@ public class EnemySpawnerScript : MonoBehaviour
     {
 
     }
-
+    
     private void PreloadRound()
     {
         roundBudget = roundSpawning.roundBudget;
-        while (roundBudget > lowestEnemyStrength)
+        bool bloop = true;
+        while (roundBudget >= lowestEnemyStrength)
         {
             float randomEnemy = Random.Range(0.0f, 100.0f);
-
-            if ((randomEnemy >= 0.0) && (randomEnemy <= 50.0f) && (roundBudget > enemyStrengths[0]))
+            
+            if ((randomEnemy >= 0.0) && (randomEnemy <= 50.0f) && (roundBudget >= Soldier.GetComponent<Soldier>().GetStrength()))
             {
-                enemiesToSpawn.Add(Enemy1);
-                roundBudget -= enemyStrengths[0];
+                enemiesToSpawn.Add(Soldier);
+                roundBudget -= Soldier.GetComponent<Soldier>().GetStrength();
             }
-            else if ((randomEnemy > 50.0f) && (randomEnemy <= 75.0f) && (roundBudget > enemyStrengths[1]))
+            else if ((randomEnemy > 50.0f) && (randomEnemy <= 75.0f) && (roundBudget >= Corporal.GetComponent<Corporal>().GetStrength()))
             {
-                enemiesToSpawn.Add(Enemy2);
-                roundBudget -= enemyStrengths[1];
+                enemiesToSpawn.Add(Corporal);
+                roundBudget -= Corporal.GetComponent<Corporal>().GetStrength();
             }
-            else if ((randomEnemy > 75.0f) && (randomEnemy <= 95.0f) && (roundBudget > enemyStrengths[2]))
+            else if ((randomEnemy > 75.0f) && (randomEnemy <= 95.0f) && (roundBudget >= Sergeant.GetComponent<Sergeant>().GetStrength()))
             {
-                enemiesToSpawn.Add(Enemy3);
-                roundBudget -= enemyStrengths[2];
+                enemiesToSpawn.Add(Sergeant);
+                roundBudget -= Sergeant.GetComponent<Sergeant>().GetStrength();
             }
-            else if ((randomEnemy > 95.0f) && (randomEnemy <= 100.0f) && (roundBudget > enemyStrengths[3]))
+            else if ((randomEnemy > 95.0f) && (randomEnemy <= 100.0f) && (roundBudget >= Lieutenant.GetComponent<Lieutenant>().GetStrength()))
             {
-                enemiesToSpawn.Add(Enemy4);
-                roundBudget -= enemyStrengths[3];
+                enemiesToSpawn.Add(Lieutenant);
+                roundBudget -= Lieutenant.GetComponent<Lieutenant>().GetStrength();
             }
         }
     }
@@ -116,15 +108,13 @@ public class EnemySpawnerScript : MonoBehaviour
     public void RemoveSpawnedEnemy(GameObject enemyToRemove)
     {
         enemiesSpawned.Remove(enemyToRemove);
-        Debug.Log("Removed enemy\nbDoneSpawning: " +bDoneSpawning.ToString() + 
-            "\nEnemiesSpawned: " + enemiesSpawned.Count.ToString() + 
-            "\nEnemiesToSpawn: " + enemiesToSpawn.Count.ToString());
 
         if (bDoneSpawning && enemiesSpawned.Count <= 0)
         {
             roundSpawning.CheckRoundCompletion(gameObject);
         }
     }
+
 
 
 }
