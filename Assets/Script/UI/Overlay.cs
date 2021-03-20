@@ -10,40 +10,47 @@ public class Overlay : MonoBehaviour
     // Private variables only changeable through script
     private int playerMoney;
     private int playerLives;
-    private GameObject dummyTower;
-    private Button cancelButton;
+    private GameObject followTower;
 
     // Public variables
     public int towerCost;
     public bool bBuyingTower;
 
     // Reference variables
-    public GameObject Tower;
-    private Camera _camera;
+    private Camera camera;
 
     // Prefab variables
+    [SerializeField] private GameObject dummyTower;
 
-    //Text variables
+    // Text variables
     private Text Lives;
     private Text Money;
     private Text TowerCost;
 
+    // Button variables
+    private Button cancelButton;
+    private Button buyButton;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize references to scene objects
+        Lives = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
+        Money = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
+        TowerCost = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton/BuyButtonText").GetComponent<Text>();
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cancelButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/CancelButton").GetComponent<Button>();
+        buyButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton").GetComponent<Button>();
+
+        // Initialize variables
         bBuyingTower = false;
         playerLives = 100;
         playerMoney = 500;
         towerCost = 100;
-
-        Lives = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
-        Money = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
-        TowerCost = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton/BuyButtonText").GetComponent<Text>();
-        UpdateText();
-
-        _camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        cancelButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/CancelButton").GetComponent<Button>();
         cancelButton.interactable = false;
+        buyButton.interactable = true;
+
+        UpdateText();
     }
 
     #region UI
@@ -54,11 +61,11 @@ public class Overlay : MonoBehaviour
         {
             bBuyingTower = true;
 
-            Vector3 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePosition = camera.ScreenToWorldPoint(Input.mousePosition);
             mousePosition.z = 0f;
-            dummyTower = Instantiate(Tower, mousePosition, Quaternion.identity);
+            followTower = Instantiate(dummyTower, mousePosition, Quaternion.identity);
 
-            ToggleCancelButton();
+            ToggleButtons();
         }
     }
 
@@ -67,16 +74,16 @@ public class Overlay : MonoBehaviour
         if (bBuyingTower)
         {
             bBuyingTower = false;
-            Destroy(dummyTower);
+            Destroy(followTower);
 
-            ToggleCancelButton();
+            ToggleButtons();
         }
     }
 
-    private void ToggleCancelButton()
+    private void ToggleButtons()
     {
-        if (bBuyingTower) { cancelButton.interactable = true; }
-        else { cancelButton.interactable = false; }
+        if (bBuyingTower) { cancelButton.interactable = true; buyButton.interactable = false; }
+        else { cancelButton.interactable = false; buyButton.interactable = true; }
     }
 
     private void UpdateText()

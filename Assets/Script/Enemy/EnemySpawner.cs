@@ -7,14 +7,15 @@ public class EnemySpawner : MonoBehaviour
     // Private variables that are changable in the editor
 
     // Private variables only changeable through script
+    private bool bDoneSpawning;
+    private bool bIsActive;
     private float spawnRate;
     private int roundBudget;
     private int lowestEnemyStrength;
-    public List<GameObject> enemiesToSpawn = new List<GameObject>();
+    private List<GameObject> enemiesToSpawn = new List<GameObject>();
+    private List<GameObject> enemiesSpawned = new List<GameObject>();
 
     // Public variables
-    public bool bDoneSpawning;
-    public List<GameObject> enemiesSpawned = new List<GameObject>();
 
     // Reference variables
 
@@ -55,12 +56,11 @@ public class EnemySpawner : MonoBehaviour
     private void PreloadRound()
     {
         roundBudget = roundSpawning.roundBudget;
-        bool bloop = true;
         while (roundBudget >= lowestEnemyStrength)
         {
             float randomEnemy = Random.Range(0.0f, 100.0f);
             
-            if ((randomEnemy >= 0.0) && (randomEnemy <= 50.0f) && (roundBudget >= Soldier.GetComponent<Soldier>().GetStrength()))
+            if ((randomEnemy >= 0.0) && (randomEnemy <= 100.0f) && (roundBudget >= Soldier.GetComponent<Soldier>().GetStrength()))
             {
                 enemiesToSpawn.Add(Soldier);
                 roundBudget -= Soldier.GetComponent<Soldier>().GetStrength();

@@ -19,6 +19,7 @@ public class Tower : MonoBehaviour
 
     // Reference variables
     private RoundSpawning roundSpawning;
+    private Overlay overlay;
 
     // Prefab variables
     [SerializeField] GameObject projectile;
@@ -27,6 +28,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         roundSpawning = GameObject.Find("Overlay").GetComponent<RoundSpawning>();
+        overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
 
         health = 50.0f;
         projectileDamage = 1.0f;
@@ -57,7 +59,10 @@ public class Tower : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Tower selected");
+        if (!overlay.bBuyingTower)
+        {
+            Debug.Log("Tower selected");
+        }
     }
 
     void FireProjectile()

@@ -19,9 +19,8 @@ public class Soldier : DefaultEnemy
 
 
     // Reference variables
-    private ControlText TextHolder;
     private Overlay overlay;
-    private MonoBehaviour rankScript;
+    private Inventory inventory;
 
     // Prefab variables
 
@@ -32,9 +31,7 @@ public class Soldier : DefaultEnemy
         bAttacking = false;
 
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-
-        // Debugging
-        TextHolder = GameObject.Find("Overlay/OverlayHolder/TextHolder").GetComponent<ControlText>();
+        inventory = GameObject.Find("Overlay").GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -59,17 +56,17 @@ public class Soldier : DefaultEnemy
 
     private void Death()
     {
+        Vector3 position = this.transform.position;
+        // Probability of spawning a module when Soldier is destroyed
+        float itemRarity = Random.Range(0.0f, 100.0f);
+             if (itemRarity >= 50.0f && itemRarity < 70.0f) { inventory.SpawnModule(ModuleRarity.Common, position); }
+        else if (itemRarity >= 70.0f && itemRarity < 85.0f) { inventory.SpawnModule(ModuleRarity.Uncommon, position); }
+        else if (itemRarity >= 85.0f && itemRarity < 95.0f) { inventory.SpawnModule(ModuleRarity.Rare, position); }
+        else if (itemRarity >= 95.0f && itemRarity < 99.0f) { inventory.SpawnModule(ModuleRarity.Exotic, position); }
+        else if (itemRarity >= 99.0f)                       { inventory.SpawnModule(ModuleRarity.Legendary, position); }
+
         parentSpawner.RemoveSpawnedEnemy(gameObject);
-
-        float itemRarityNumber = Random.Range(0.0f, 100.0f);
-        TextHolder.ChangeValues(itemRarityNumber);
-
         Destroy(gameObject);
-    }
-
-    public void AttackTower()
-    {
-        Debug.Log("Attacking tower");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -81,11 +78,17 @@ public class Soldier : DefaultEnemy
         }
     }
 
+    public void AttackTower()
+    {
+        Debug.Log("Attacking tower");
+    }
+
     public int GetStrength()
     {
         return enemyStrength;
     }
 
+    // Called specifically when the enemy is destroyed via the out-of-bounds gameobject
     public void RemoveFromSpawner(GameObject enemyToRemvoe)
     {
         parentSpawner.RemoveSpawnedEnemy(enemyToRemvoe);
