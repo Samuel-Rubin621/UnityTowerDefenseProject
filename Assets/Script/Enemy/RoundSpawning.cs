@@ -24,6 +24,11 @@ public class RoundSpawning : MonoBehaviour
     // Private variables only changeable through script
     private int round;
     private List<GameObject> towerList = new List<GameObject>();
+    public List<GameObject> TowerList
+    {
+        get { return towerList; }
+    }
+
     private List<EnemySpawnerStruct> enemySpawnersList = new List<EnemySpawnerStruct>();
     private Button startRoundButton;
     private Text startRoundButtonText;
