@@ -14,16 +14,17 @@ public class TowerPanel : MonoBehaviour
 
     // Object references
     private Tower towerReference;
-    public Tower TowerReference
-    {
-        get { return towerReference; }
-        set { towerReference = value; }
-    }
+    private InventoryPanel inventoryPanel;
+
+    public Tower TowerReference { get => towerReference; set => towerReference = value; }
+    public InventoryPanel InventoryPanel { get => inventoryPanel; set => inventoryPanel = value; }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        InventoryPanel = GameObject.Find("Overlay/InventoryPanel").GetComponent<InventoryPanel>();
+
         FireRateText = GameObject.Find("Overlay/TowerPanel(Clone)/TowerStatsDisplayer/FireRateText").GetComponent<Text>();
         DamageText = GameObject.Find("Overlay/TowerPanel(Clone)/TowerStatsDisplayer/DamageText").GetComponent<Text>();
         FireDamageText = GameObject.Find("Overlay/TowerPanel(Clone)/TowerStatsDisplayer/FireDamageText").GetComponent<Text>();
@@ -55,26 +56,31 @@ public class TowerPanel : MonoBehaviour
 
     public void Module1()
     {
-
+        InventoryPanel.MoveOnScreen();
+        InventoryPanel.TowerReference = TowerReference;
     }
 
     public void Module2()
     {
-
+        InventoryPanel.MoveOnScreen();
+        InventoryPanel.TowerReference = TowerReference;
     }
     
     public void Module3()
     {
-
+        InventoryPanel.MoveOnScreen();
+        InventoryPanel.TowerReference = TowerReference;
     }
 
     public void Module4()
     {
-
+        InventoryPanel.MoveOnScreen();
+        InventoryPanel.TowerReference = TowerReference;
     }
 
     public void ClosePanel()
     {
+        InventoryPanel.MoveOffScreen();
         Destroy(gameObject);
     }
 }

@@ -16,7 +16,7 @@ public class Soldier : DefaultEnemy
     private EnemySpawner parentSpawner;
 
     // Public variables
-
+    public GameObject module;
 
     // Reference variables
     private Overlay overlay;
@@ -31,7 +31,7 @@ public class Soldier : DefaultEnemy
         bAttacking = false;
 
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-        inventory = GameObject.Find("Overlay").GetComponent<Inventory>();
+        inventory = GameObject.Find("GameManager").GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -57,6 +57,10 @@ public class Soldier : DefaultEnemy
     private void Death()
     {
         Vector3 position = this.transform.position;
+        Instantiate(module, position, Quaternion.identity);
+
+        /*
+        Vector3 position = this.transform.position;
         // Probability of spawning a module when Soldier is destroyed
         float itemRarity = Random.Range(0.0f, 100.0f);
              if (itemRarity >= 50.0f && itemRarity < 70.0f) { inventory.SpawnModule(ModuleRarity.Common, position); }
@@ -64,7 +68,7 @@ public class Soldier : DefaultEnemy
         else if (itemRarity >= 85.0f && itemRarity < 95.0f) { inventory.SpawnModule(ModuleRarity.Rare, position); }
         else if (itemRarity >= 95.0f && itemRarity < 99.0f) { inventory.SpawnModule(ModuleRarity.Exotic, position); }
         else if (itemRarity >= 99.0f)                       { inventory.SpawnModule(ModuleRarity.Legendary, position); }
-
+        */
         parentSpawner.RemoveSpawnedEnemy(gameObject);
         Destroy(gameObject);
     }

@@ -54,7 +54,7 @@ public class RoundSpawning : MonoBehaviour
         startRoundButton.interactable = true;
 
         // Set up the spawners
-        SetupSpawnerReference();
+        SetupActiveSpawners();
 
         // Set up starting values
         round = 1;
@@ -62,12 +62,16 @@ public class RoundSpawning : MonoBehaviour
         startRoundButtonText.text = "Start Round " + round.ToString();
     }
 
-    private void SetupSpawnerReference()
+    private void SetupActiveSpawners()
     {
         foreach (GameObject spawner in GameObject.FindGameObjectsWithTag("EnemySpawner"))
         {
             enemySpawnersList.Add(new EnemySpawnerStruct(spawner, false));
         }
+
+
+
+
     }
 
     public void AddTowerToList(GameObject towerToAdd)
@@ -98,7 +102,7 @@ public class RoundSpawning : MonoBehaviour
         round++;
         startRoundButton.interactable = true;
         enemySpawnersList.Clear();
-        SetupSpawnerReference();
+        SetupActiveSpawners();
         startRoundButtonText.text = "Start Round " + round.ToString();
     }
 
