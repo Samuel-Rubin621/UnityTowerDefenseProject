@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6367508057706233343}
   - component: {fileID: 8008373084683245763}
   - component: {fileID: 3713747749246154178}
-  - component: {fileID: 608527551099085914}
+  - component: {fileID: -1553011344322105739}
   m_Layer: 12
-  m_Name: Great_General
+  m_Name: 6_General
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 638931607951271430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,11 +70,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2094524423
-  m_SortingLayer: 3
+  m_SortingLayerID: 1864509083
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb1a60a97deccd048bc79c6b267a7bae, type: 3}
-  m_Color: {r: 0, g: 0.72210264, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 272ab27dab7fa874bbaf3419c76e8199, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,14 +115,14 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &608527551099085914
+--- !u!114 &-1553011344322105739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 638931607951271430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e9c4d1ac9cb4e54d9af9a20a4097e0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 93540704aeec0184580c6ffb9d0b8a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

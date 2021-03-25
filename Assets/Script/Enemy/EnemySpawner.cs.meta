@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - Soldier: {fileID: 638931607951271430, guid: abe041ff8b4e5f54799c87e068e9c63a,
       type: 3}
-  - Corporal: {fileID: 638931607951271430, guid: 58d523cf9951b5843b43eadbc4a7ae43,
+  - Corporal: {fileID: 638931607951271430, guid: e1ea08b50672d5a46bed07b115be41b8,
       type: 3}
   - Sergeant: {fileID: 638931607951271430, guid: 3fa6f608a8316bf4bb2fd47a506cdc32,
       type: 3}

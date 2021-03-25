@@ -23,7 +23,7 @@ public class TowerPlacement : MonoBehaviour
     void Start()
     {
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-        roundSpawning = GameObject.Find("Overlay").GetComponent<RoundSpawning>();
+        roundSpawning = GameObject.Find("GameManager").GetComponent<RoundSpawning>();
         bTowerPlaced = false;
     }
 

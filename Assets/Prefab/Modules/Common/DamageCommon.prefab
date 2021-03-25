@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3294395275697611810}
   - component: {fileID: 801119079111072056}
-  - component: {fileID: -3584103314941308204}
   - component: {fileID: -3754296779960028324}
-  m_Layer: 0
-  m_Name: CommonHealthModule
-  m_TagString: Untagged
+  - component: {fileID: -3584103314941308204}
+  m_Layer: 14
+  m_Name: DamageCommon
+  m_TagString: Modules
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e089cf89111efa24fb4442fa6fef70f4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6217325, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,20 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3584103314941308204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7404481361190070556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d291b4926c8bcd43b8bb47cbe411d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemButton: {fileID: 3124912497335873878, guid: 266fbb357936d10428ea06703bf9daaf,
-    type: 3}
 --- !u!61 &-3754296779960028324
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,3 +109,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-3584103314941308204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404481361190070556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d291b4926c8bcd43b8bb47cbe411d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButton: {fileID: 3124912497335873878, guid: 266fbb357936d10428ea06703bf9daaf,
+    type: 3}

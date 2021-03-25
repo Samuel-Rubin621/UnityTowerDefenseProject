@@ -4,75 +4,64 @@ using UnityEngine;
 
 public class Soldier : DefaultEnemy
 {
-    // Private variables that are changable in the editor
-
-    // Private variables only changeable through script
+    #region Variables
+    // Enemy stat variables
     private float enemyHealth = 1.0f;
     private float enemyDamage = 1.0f;
     private float enemySpeed = 50.0f;
     private int enemyValue = 1;
     private int enemyStrength = 1;
+
+    // Boolean variables for checking
     private bool bAttacking;
     private EnemySpawner parentSpawner;
 
-    // Public variables
-    public GameObject module;
+    // Border variables for spawning modules
+    private float common;
+    private float uncommon;
+    private float rare;
+    private float exotic;
+    private float legendary;
+
 
     // Reference variables
     private Overlay overlay;
-    private Inventory inventory;
+    private GenerateModule moduleGeneration;
 
-    // Prefab variables
+    // Getter and Setter functions
+    public float EnemyHealth { get => enemyHealth; set => enemyHealth = value; }
+    public float EnemyDamage { get => enemyDamage; set => enemyDamage = value; }
+    public float EnemySpeed { get => enemySpeed; set => enemySpeed = value; }
+    public int EnemyValue { get => enemyValue; set => enemyValue = value; }
+    public int EnemyStrength { get => enemyStrength; set => enemyStrength = value; }
+    public bool BAttacking { get => bAttacking; set => bAttacking = value; }
+    public EnemySpawner ParentSpawner { get => parentSpawner; set => parentSpawner = value; }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        parentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawner>();
-        bAttacking = false;
-
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-        inventory = GameObject.Find("GameManager").GetComponent<Inventory>();
-    }
+        moduleGeneration = GameObject.Find("GameManager").GetComponent<GenerateModule>();
+        ParentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawner>();
+        BAttacking = false;
+
+        common = 50.0f;
+        uncommon = 80.0f;
+        rare = 95.0f;
+        exotic = 98.5f;
+        legendary = 99.9f;
+}
 
     // Update is called once per frame
     void Update()
     {
-        if (!bAttacking)
+        if (!BAttacking)
         {
-            transform.Translate(Vector3.left * enemySpeed * Time.deltaTime);
+            transform.Translate(Vector3.left * EnemySpeed * Time.deltaTime);
         }
     }
-
-    public void TakeDamage(float incomingDamage)
-    {
-        enemyHealth -= incomingDamage;
-
-        if (enemyHealth <= 0)
-        {
-            Death();
-            overlay.IncreaseMoney(enemyValue);
-        }
-    }
-
-    private void Death()
-    {
-        Vector3 position = this.transform.position;
-        Instantiate(module, position, Quaternion.identity);
-
-        /*
-        Vector3 position = this.transform.position;
-        // Probability of spawning a module when Soldier is destroyed
-        float itemRarity = Random.Range(0.0f, 100.0f);
-             if (itemRarity >= 50.0f && itemRarity < 70.0f) { inventory.SpawnModule(ModuleRarity.Common, position); }
-        else if (itemRarity >= 70.0f && itemRarity < 85.0f) { inventory.SpawnModule(ModuleRarity.Uncommon, position); }
-        else if (itemRarity >= 85.0f && itemRarity < 95.0f) { inventory.SpawnModule(ModuleRarity.Rare, position); }
-        else if (itemRarity >= 95.0f && itemRarity < 99.0f) { inventory.SpawnModule(ModuleRarity.Exotic, position); }
-        else if (itemRarity >= 99.0f)                       { inventory.SpawnModule(ModuleRarity.Legendary, position); }
-        */
-        parentSpawner.RemoveSpawnedEnemy(gameObject);
-        Destroy(gameObject);
-    }
-
+    #region Attack
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Tower"))
@@ -86,19 +75,39 @@ public class Soldier : DefaultEnemy
     {
         Debug.Log("Attacking tower");
     }
+    #endregion
 
-    public int GetStrength()
+    #region Damage and Death
+    public void TakeDamage(float incomingDamage)
     {
-        return enemyStrength;
+        EnemyHealth -= incomingDamage;
+
+        if (EnemyHealth <= 0)
+        {
+            Death();
+            overlay.IncreaseMoney(EnemyValue);
+        }
+    }
+
+    private void Death()
+    {
+        Vector3 position = this.transform.position;
+        // Probability of spawning a module when Soldier is destroyed
+        float itemRarity = Random.Range(0.0f, 100.0f);
+        if (itemRarity >= common && itemRarity < uncommon) { moduleGeneration.SpawnModule(ModuleRarity.COMMON, position); }
+        else if (itemRarity >= uncommon && itemRarity < rare) { moduleGeneration.SpawnModule(ModuleRarity.UNCOMMON, position); }
+        else if (itemRarity >= rare && itemRarity < exotic) { moduleGeneration.SpawnModule(ModuleRarity.RARE, position); }
+        else if (itemRarity >= exotic && itemRarity < legendary) { moduleGeneration.SpawnModule(ModuleRarity.EXOTIC, position); }
+        else if (itemRarity >= legendary) { moduleGeneration.SpawnModule(ModuleRarity.LEGENDARY, position); }
+
+        ParentSpawner.RemoveSpawnedEnemy(gameObject);
+        Destroy(gameObject);
     }
 
     // Called specifically when the enemy is destroyed via the out-of-bounds gameobject
     public void RemoveFromSpawner(GameObject enemyToRemvoe)
     {
-        parentSpawner.RemoveSpawnedEnemy(enemyToRemvoe);
+        ParentSpawner.RemoveSpawnedEnemy(enemyToRemvoe);
     }
-
-
-
-
+    #endregion
 }

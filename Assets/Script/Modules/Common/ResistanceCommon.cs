@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageCommon : MonoBehaviour
+public class ResistanceCommon : MonoBehaviour
 {
     private Tower towerReference;
 
@@ -11,7 +11,7 @@ public class DamageCommon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TowerReference = transform.parent.GetComponent<InventoryPanel>().TowerReference;
+        
     }
 
     // Update is called once per frame

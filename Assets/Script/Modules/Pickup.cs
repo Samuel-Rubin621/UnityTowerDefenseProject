@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Pickup : MonoBehaviour
+public class Pickup : MonoBehaviour, IPointerClickHandler
 {
     private Inventory inventory;
     public GameObject itemButton;
@@ -13,7 +14,7 @@ public class Pickup : MonoBehaviour
         inventory = GameObject.Find("GameManager").GetComponent<Inventory>();
     }
 
-    public void OnMouseDown()
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
         for (int i = 0; i < inventory.slots.Length; i++)
         {
