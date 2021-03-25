@@ -36,9 +36,14 @@ public class DamageCommon : MonoBehaviour
         }
     }
 
-    public void Use()
+    public void Select()
     {
         InventoryPanel.transform.Find("ModuleDetails").GetComponent<Text>().text = textDetails;
         InventoryPanel.GetComponent<InventoryPanel>().ModuleSelected(gameObject);
+    }
+
+    public void Use()
+    {
+
     }
 }

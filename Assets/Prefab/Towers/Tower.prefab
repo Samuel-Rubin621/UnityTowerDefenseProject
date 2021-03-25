@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942612221586048279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 2.16, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4244309559232295698}
@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5603971666376401984}
   - component: {fileID: 4738328730299378808}
   - component: {fileID: -8652196598685669494}
+  - component: {fileID: 9174904977217217322}
   m_Layer: 13
   m_Name: Tower
   m_TagString: Tower
@@ -60,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 8942392803968974698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 2105721473447637600}
   m_Father: {fileID: 0}
@@ -79,18 +80,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5.1, y: 5.1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5, y: 4}
   m_EdgeRadius: 0
 --- !u!50 &-9038354835454362489
 Rigidbody2D:
@@ -152,8 +153,9 @@ SpriteRenderer:
   m_SortingLayerID: 2094524423
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 01ba6320ff73b284d884803839609dc6, type: 3}
-  m_Color: {r: 0.104001164, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: -8181805546860848576, guid: 34e931c1fbe06d24bb79717f088116ce,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -199,3 +201,22 @@ MonoBehaviour:
   - {fileID: 0}
   defaultSlot: {fileID: 2405827055287492202, guid: b1266281dda9edb4380ab50e4ea5e7c2,
     type: 3}
+--- !u!95 &9174904977217217322
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942392803968974698}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37cc8717c7d9c7c49a81dad311889d7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

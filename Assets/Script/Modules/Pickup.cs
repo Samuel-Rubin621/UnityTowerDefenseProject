@@ -16,16 +16,7 @@ public class Pickup : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        for (int i = 0; i < inventory.slots.Length; i++)
-        {
-            if (inventory.isFull[i] == false)
-            {
-                // ADD ITEM TO INVENTORY
-                inventory.isFull[i] = true;
-                Instantiate(itemButton, inventory.slots[i].transform, false);
-                Destroy(gameObject);
-                break;
-            }
-        }
+        inventory.IncreaseInventory(gameObject);
+        Destroy(gameObject);
     }
 }

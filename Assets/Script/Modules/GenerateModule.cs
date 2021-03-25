@@ -33,7 +33,9 @@ public class GenerateModule : MonoBehaviour
             case ModuleRarity.COMMON:
                 if (commonModules.Count > 0)
                 {
-                    GameObject addedItem = Instantiate(commonModules[Random.Range(0, commonModules.Count)], position, Quaternion.identity);
+                    GameObject moduleToSpawn = commonModules[Random.Range(0, commonModules.Count)];
+                    GameObject addedItem = Instantiate(moduleToSpawn, position, Quaternion.identity);
+                    addedItem.name = moduleToSpawn.name;
                 }
                 break;
             case ModuleRarity.UNCOMMON:

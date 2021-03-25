@@ -19,6 +19,7 @@ public class InventoryPanel : MonoBehaviour
 
     // Reference variables
     private GameObject tower;
+    private Inventory inventory;
 
     // Get and Set functions
     public GameObject Tower { get => tower; set => tower = value; }
@@ -28,6 +29,7 @@ public class InventoryPanel : MonoBehaviour
     void Start()
     {
         // Set up references
+        inventory = GameObject.Find("GameManager").GetComponent<Inventory>();
         addModule = transform.Find("AddButton").GetComponent<Button>();
         moduleDetails = transform.Find("ModuleDetails").GetComponent<Text>();
         position = GetComponent<RectTransform>();
@@ -51,17 +53,20 @@ public class InventoryPanel : MonoBehaviour
     public void ModuleSelected(GameObject module)
     {
         selectedModule = module;
-        addModule.interactable = true;
+        if (inventory.CheckInventory(selectedModule) > 0)
+        {
+            addModule.interactable = true;
+        }
+        else
+        {
+            addModule.interactable = false;
+        }
     }
 
     public void AddModuleToTower()
     {
         Tower.GetComponent<Modules>().AddModule(selectedModule, moduleSlot);
-
-        selectedModule.transform.parent.GetComponent<Slot>().DropItem();
-
-
-
+        inventory.DecreaseInventory(selectedModule);
 
         MoveOffScreen();
     }

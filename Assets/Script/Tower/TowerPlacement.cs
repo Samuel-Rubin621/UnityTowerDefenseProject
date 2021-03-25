@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TowerPlacement : MonoBehaviour
+public class TowerPlacement : MonoBehaviour, IPointerClickHandler
 {
     // Private variables that are changable in the editor
 
@@ -33,7 +34,7 @@ public class TowerPlacement : MonoBehaviour
         
     }
 
-    void OnMouseDown()
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
         if (overlay.bBuyingTower && !bTowerPlaced && overlay.CheckMoney())
         {
