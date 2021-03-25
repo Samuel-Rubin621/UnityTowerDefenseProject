@@ -23,12 +23,10 @@ public class Inventory : MonoBehaviour
 
     public void IncreaseInventory(GameObject module)
     {
-        Debug.Log("Increasing stock of " + module.ToString());
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].name == module.name)
             {
-                Debug.Log("Increasing stock");
                 stock[i]++;
                 slots[i].transform.Find("Stock").GetComponent<Text>().text = stock[i].ToString();
             }
@@ -37,7 +35,6 @@ public class Inventory : MonoBehaviour
 
     public void DecreaseInventory(GameObject module)
     {
-        Debug.Log("Decreasing stock");
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].name == module.name)

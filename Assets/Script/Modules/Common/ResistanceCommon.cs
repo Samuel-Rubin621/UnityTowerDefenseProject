@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResistanceCommon : MonoBehaviour
+public class ResistanceCommon : MonoBehaviour, IAddModule
 {
     private Tower towerReference;
     private GameObject inventoryPanel;
@@ -24,14 +24,14 @@ public class ResistanceCommon : MonoBehaviour
         switch (chooseModifier)
         {
             case 0:
-                increasePhysicalResistancePoints = 5.0f;
-                increasePhysicalResistancePercent = 0.0f;
-                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePoints.ToString() + "%.";
+                increasePhysicalResistancePercent = 15.0f;
+                increasePhysicalResistancePoints = 0.0f;
+                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePercent.ToString() + "%.";
                 break;
             case 1:
-                increasePhysicalResistancePercent = 2.0f;
-                increasePhysicalResistancePoints = 0.0f;
-                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePercent.ToString() + " points.";
+                increasePhysicalResistancePoints = 5.0f;
+                increasePhysicalResistancePercent = 0.0f;
+                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePoints.ToString() + " points.";
                 break;
         }
     }
@@ -42,8 +42,9 @@ public class ResistanceCommon : MonoBehaviour
         InventoryPanel.GetComponent<InventoryPanel>().ModuleSelected(gameObject);
     }
 
-    public void Use()
+    public IEnumerator AddModuleToTower(Tower tower)
     {
-
+        tower.PhysicalDamageResistance = tower.PhysicalDamageResistance + (tower.PhysicalDamageResistance * increasePhysicalResistancePercent * 0.01f) + increasePhysicalResistancePoints;
+        yield return null;
     }
 }

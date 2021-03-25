@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DamageCommon : MonoBehaviour
+public class DamageCommon : MonoBehaviour, IAddModule
 {
     private Tower towerReference;
     private GameObject inventoryPanel;
@@ -42,8 +42,9 @@ public class DamageCommon : MonoBehaviour
         InventoryPanel.GetComponent<InventoryPanel>().ModuleSelected(gameObject);
     }
 
-    public void Use()
+    public IEnumerator AddModuleToTower(Tower tower)
     {
-
+        tower.ProjectilePhysicalDamage = tower.ProjectilePhysicalDamage + (tower.ProjectilePhysicalDamage * increaseDamagePercent * 0.01f) + increaseDamageValue;
+        yield return null;
     }
 }

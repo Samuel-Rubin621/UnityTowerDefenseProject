@@ -5,14 +5,42 @@ using UnityEngine.EventSystems;
 
 public class Tower : MonoBehaviour, IPointerClickHandler
 {
-    // Tower stats with get and set functions where necessary
-    private float health;
+    #region Variables
+    // Tower base stats used for module modifiers
+    private float baseProjectilePhysicalDamage;
+    private float baseProjectileFireDamage;
+    private float baseFireRate;
+    private float baseProjectileSpeed;
+    private float baseHealth;
+    private float basePhysicalDamageResistance;
+    private float baseFireDamageResistance;
+
+    // Base value Get and Set functions
+    public float BaseProjectilePhysicalDamage { get => baseProjectilePhysicalDamage; set => baseProjectilePhysicalDamage = value; }
+    public float BaseProjectileFireDamage { get => baseProjectileFireDamage; set => baseProjectileFireDamage = value; }
+    public float BaseFireRate { get => baseFireRate; set => baseFireRate = value; }
+    public float BaseProjectileSpeed { get => baseProjectileSpeed; set => baseProjectileSpeed = value; }
+    public float BaseHealth { get => baseHealth; set => baseHealth = value; }
+    public float BasePhysicalDamageResistance { get => basePhysicalDamageResistance; set => basePhysicalDamageResistance = value; }
+    public float BaseFireDamageResistance { get => baseFireDamageResistance; set => baseFireDamageResistance = value; }
+
+    // Tower stat variables
     private float projectilePhysicalDamage;
     private float projectileFireDamage;
     private float fireRate;
     private float projectileSpeed;
+    private float health;
     private float physicalDamageResistance;
     private float fireDamageResistance;
+
+    // Tower stat Get and Set functions
+    public float ProjectilePhysicalDamage { get => projectilePhysicalDamage; set => projectilePhysicalDamage = value; }
+    public float ProjectileFireDamage { get => projectileFireDamage; set => projectileFireDamage = value; }
+    public float FireRate { get => fireRate; set => fireRate = value; }
+    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public float Health { get => health; set => health = value; }
+    public float PhysicalDamageResistance { get => physicalDamageResistance; set => physicalDamageResistance = value; }
+    public float FireDamageResistance { get => fireDamageResistance; set => fireDamageResistance = value; }
 
     // Module variables
     private TowerPanel towerPanel;
@@ -26,15 +54,7 @@ public class Tower : MonoBehaviour, IPointerClickHandler
     // Prefab variables set in the editor
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject towerPanelPrefab;
-
-    public float Health { get => health; set => health = value; }
-    public float ProjectilePhysicalDamage { get => projectilePhysicalDamage; set => projectilePhysicalDamage = value; }
-    public float ProjectileFireDamage { get => projectileFireDamage; set => projectileFireDamage = value; }
-    public float FireRate { get => fireRate; set => fireRate = value; }
-    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
-    public float PhysicalDamageResistance { get => physicalDamageResistance; set => physicalDamageResistance = value; }
-    public float FireDamageResistance { get => fireDamageResistance; set => fireDamageResistance = value; }
-    
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -43,11 +63,23 @@ public class Tower : MonoBehaviour, IPointerClickHandler
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
         TowerPanel = GameObject.Find("TowerPanel").GetComponent<TowerPanel>();
 
-        Health = 50.0f;
-        ProjectilePhysicalDamage = 1.0f;
-        ProjectileFireDamage = 0.0f;
-        FireRate = 2.5f;
-        ProjectileSpeed = 500.0f;
+        // Setup base stat values for module modifiers
+        BaseHealth = 50.0f;
+        BaseProjectilePhysicalDamage = 100.0f;
+        BaseProjectileFireDamage = 10.0f;
+        BaseFireRate = 2.0f;
+        BaseProjectileSpeed = 500.0f;
+        BasePhysicalDamageResistance = 10.0f;
+        BaseFireDamageResistance = 10.0f;
+
+        // Setup stat values
+        Health = BaseHealth;
+        ProjectilePhysicalDamage = BaseProjectilePhysicalDamage;
+        ProjectileFireDamage = BaseProjectileFireDamage;
+        FireRate = BaseFireRate;
+        ProjectileSpeed = BaseProjectileSpeed;
+        PhysicalDamageResistance = BasePhysicalDamageResistance;
+        FireDamageResistance = BaseFireDamageResistance;
 
         projectileSpawn = transform.GetChild(0).gameObject;
 
@@ -64,6 +96,18 @@ public class Tower : MonoBehaviour, IPointerClickHandler
         {
             CancelInvoke("FireProjectile");
         }
+    }
+
+    public IEnumerator ResetTower()
+    {
+        Health = BaseHealth;
+        ProjectilePhysicalDamage = BaseProjectilePhysicalDamage;
+        ProjectileFireDamage = BaseProjectileFireDamage;
+        FireRate = BaseFireRate;
+        ProjectileSpeed = BaseProjectileSpeed;
+        PhysicalDamageResistance = BasePhysicalDamageResistance;
+        FireDamageResistance = BaseFireDamageResistance;
+        yield return null;
     }
 
     public void RoundStart()
