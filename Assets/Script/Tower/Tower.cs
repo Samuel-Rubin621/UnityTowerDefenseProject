@@ -25,12 +25,12 @@ public class Tower : MonoBehaviour, IPointerClickHandler
     public float BaseFireDamageResistance { get => baseFireDamageResistance; set => baseFireDamageResistance = value; }
 
     // Tower stat variables
-    private float projectilePhysicalDamage;
+    public float projectilePhysicalDamage;
     private float projectileFireDamage;
     private float fireRate;
     private float projectileSpeed;
     private float health;
-    private float physicalDamageResistance;
+    public float physicalDamageResistance;
     private float fireDamageResistance;
 
     // Tower stat Get and Set functions
@@ -44,7 +44,6 @@ public class Tower : MonoBehaviour, IPointerClickHandler
 
     // Module variables
     private TowerPanel towerPanel;
-    public TowerPanel TowerPanel { get => towerPanel; set => towerPanel = value; }
 
     // Reference variables
     private GameObject projectileSpawn;
@@ -61,7 +60,7 @@ public class Tower : MonoBehaviour, IPointerClickHandler
     {
         roundSpawning = GameObject.Find("GameManager").GetComponent<RoundSpawning>();
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
-        TowerPanel = GameObject.Find("TowerPanel").GetComponent<TowerPanel>();
+        towerPanel = GameObject.Find("TowerPanel").GetComponent<TowerPanel>();
 
         // Setup base stat values for module modifiers
         BaseHealth = 50.0f;
@@ -110,6 +109,18 @@ public class Tower : MonoBehaviour, IPointerClickHandler
         yield return null;
     }
 
+    public IEnumerator MovedTower(Tower movedTower)
+    {
+        yield return new WaitForSeconds(1);
+        Health = movedTower.Health;
+        ProjectilePhysicalDamage = movedTower.ProjectilePhysicalDamage;
+        ProjectileFireDamage = movedTower.ProjectileFireDamage;
+        FireRate = movedTower.FireRate;
+        ProjectileSpeed = movedTower.ProjectileSpeed;
+        PhysicalDamageResistance = movedTower.PhysicalDamageResistance;
+        FireDamageResistance = movedTower.FireDamageResistance;
+    }
+
     public void RoundStart()
     {
         InvokeRepeating("FireProjectile", 1.0f, FireRate);
@@ -117,9 +128,9 @@ public class Tower : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        if (!overlay.bBuyingTower)
+        if (!overlay.bBuyingTower && !towerPanel.bMovingTower)
         {
-            TowerPanel.MoveOnScreen(this);
+            towerPanel.MoveOnScreen(this);
         }
     }
 

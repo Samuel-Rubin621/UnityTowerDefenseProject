@@ -12,17 +12,17 @@ public class Soldier : DefaultEnemy
     private int enemyValue = 1;
     private int enemyStrength = 1;
 
+    // Variables for storing probabilities of spawning a drop
+    private float common = 50.0f;
+    private float uncommon = 80.0f;
+    private float rare = 95.0f;
+    private float exotic = 98.5f;
+    private float legendary = 99.9f;
+
     // Boolean variables for checking
     private bool bAlive;
     private bool bAttacking;
     private EnemySpawner parentSpawner;
-
-    // Variables for storing probabilities of spawning a drop
-    private float common;
-    private float uncommon;
-    private float rare;
-    private float exotic;
-    private float legendary;
 
     // Reference variables
     private Overlay overlay;
@@ -48,13 +48,7 @@ public class Soldier : DefaultEnemy
         ParentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawner>();
         bAlive = true;
         BAttacking = false;
-
-        common = 50.0f;
-        uncommon = 80.0f;
-        rare = 95.0f;
-        exotic = 98.5f;
-        legendary = 99.9f;
-}
+    }
 
     // Update is called once per frame
     void Update()

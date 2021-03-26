@@ -12,20 +12,22 @@ public class Master_General : DefaultEnemy
     private int enemyValue = 1;
     private int enemyStrength = 1;
 
+    // Border variables for spawning modules
+    private float common = 0.0f;
+    private float uncommon = 0.0f;
+    private float rare = 0.0f;
+    private float exotic = 0.0f;
+    private float legendary = 0.0f;
+
     // Boolean variables for checking
+    private bool bAlive;
     private bool bAttacking;
     private EnemySpawner parentSpawner;
-
-    // Border variables for spawning modules
-    private float common;
-    private float uncommon;
-    private float rare;
-    private float exotic;
-    private float legendary;
 
     // Reference variables
     private Overlay overlay;
     private GenerateModule moduleGeneration;
+    //private Animator animator;
 
     // Getter and Setter functions
     public float EnemyHealth { get => enemyHealth; set => enemyHealth = value; }
@@ -42,20 +44,16 @@ public class Master_General : DefaultEnemy
     {
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
         moduleGeneration = GameObject.Find("GameManager").GetComponent<GenerateModule>();
+        //animator = GetComponent<Animator>();
         ParentSpawner = this.transform.parent.gameObject.GetComponent<EnemySpawner>();
+        bAlive = true;
         BAttacking = false;
-
-        common = 0.0f;
-        uncommon = 0.0f;
-        rare = 0.0f;
-        exotic = 0.0f;
-        legendary = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!BAttacking)
+        if (!BAttacking && bAlive)
         {
             transform.Translate(Vector3.left * EnemySpeed * Time.deltaTime);
         }
@@ -83,13 +81,18 @@ public class Master_General : DefaultEnemy
 
         if (EnemyHealth <= 0)
         {
-            Death();
+            StartCoroutine(DeathCoroutine());
             overlay.IncreaseMoney(EnemyValue);
         }
     }
 
-    private void Death()
+    IEnumerator DeathCoroutine()
     {
+        bAlive = false;
+        GetComponent<Collider2D>().enabled = false;
+        //animator.SetTrigger("Die");
+        yield return new WaitForSeconds(1);
+
         Vector3 position = this.transform.position;
         // Probability of spawning a module when Soldier is destroyed
         float itemRarity = Random.Range(0.0f, 100.0f);
@@ -102,7 +105,20 @@ public class Master_General : DefaultEnemy
         ParentSpawner.RemoveSpawnedEnemy(gameObject);
         Destroy(gameObject);
     }
+    /*
+    public AnimationClip FindAnimation(string name)
+    {
+        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == name)
+            {
+                return clip;
+            }
+        }
 
+        return null;
+    }
+    */
     // Called specifically when the enemy is destroyed via the out-of-bounds gameobject
     public void RemoveFromSpawner(GameObject enemyToRemvoe)
     {

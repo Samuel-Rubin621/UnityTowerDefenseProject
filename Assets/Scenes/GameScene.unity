@@ -688,6 +688,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a160631f16b1b6d4d805fb729fe252f8, type: 3}
+--- !u!1 &211460995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211460996}
+  - component: {fileID: 211460998}
+  - component: {fileID: 211460997}
+  m_Layer: 0
+  m_Name: EnergyCircleSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &211460996
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211460995}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1441953525}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 737, y: 190}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &211460997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211460995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4f7a97433d406534b99b99c77e6d7e1c, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 0.656
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &211460998
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211460995}
+  m_CullTransparentMesh: 0
 --- !u!1001 &231236931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1191,7 +1265,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
@@ -3687,51 +3761,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1961200713531240717, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520985005324210018, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_OverrideSorting
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2749144485182031649, guid: 7a7db80d1653ee648834eecc57bb7d74,
         type: 3}
       propertyPath: m_Name
       value: TowerPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 5354370867228902278, guid: 7a7db80d1653ee648834eecc57bb7d74,
+    - target: {fileID: 4965472856945964655, guid: 7a7db80d1653ee648834eecc57bb7d74,
         type: 3}
-      propertyPath: m_Icon
+      propertyPath: dummyTower
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5958331950369877879, guid: 7a7db80d1653ee648834eecc57bb7d74,
+      objectReference: {fileID: 591551215834965129, guid: 3498643a9610eb647a2b069f139421a4,
         type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6266515389142836215, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6406515470463349569, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6731585042266525342, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 290
-      objectReference: {fileID: 0}
-    - target: {fileID: 8989673563524390360, guid: 7a7db80d1653ee648834eecc57bb7d74,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 250
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a7db80d1653ee648834eecc57bb7d74, type: 3}
 --- !u!1 &927654524
@@ -3912,7 +3952,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
@@ -4737,6 +4777,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1870012062}
+        m_MethodName: CancelMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1126980868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5058,7 +5109,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
@@ -5427,6 +5478,7 @@ GameObject:
   - component: {fileID: 1375427287}
   - component: {fileID: 1375427289}
   - component: {fileID: 1375427290}
+  - component: {fileID: 1375427291}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5510,6 +5562,18 @@ MonoBehaviour:
   rareModules: []
   exoticModules: []
   legendaryModules: []
+--- !u!114 &1375427291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375427286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212e7a6769d52884baec657c2e960cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1394467802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5798,6 +5862,7 @@ RectTransform:
   - {fileID: 1640811437}
   - {fileID: 910166304}
   - {fileID: 927654525}
+  - {fileID: 211460996}
   m_Father: {fileID: 1578767202}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6187,7 +6252,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
@@ -6627,9 +6692,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerCost: 0
+  movementCost: 0
   bBuyingTower: 0
   dummyTower: {fileID: 591551215834965129, guid: 3498643a9610eb647a2b069f139421a4,
     type: 3}
+  cancelButton: {fileID: 0}
+  buyButton: {fileID: 0}
 --- !u!1 &1587353002
 GameObject:
   m_ObjectHideFlags: 0
@@ -7628,7 +7696,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
@@ -7862,6 +7930,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a160631f16b1b6d4d805fb729fe252f8, type: 3}
+--- !u!114 &1870012062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4965472856945964655, guid: 7a7db80d1653ee648834eecc57bb7d74,
+    type: 3}
+  m_PrefabInstance: {fileID: 924815162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a547060ef1de74f99df7a8dbaa69c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1870485726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8623,7 +8703,7 @@ PrefabInstance:
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2015892513957391112, guid: a160631f16b1b6d4d805fb729fe252f8,
         type: 3}

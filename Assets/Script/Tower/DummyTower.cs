@@ -9,6 +9,7 @@ public class DummyTower : MonoBehaviour
     // Private variables only changeable through script
     private Vector3 mousePosition;
     private float moveSpeed = 0.1f;
+    private Tower tower;
 
     // Public variables
 

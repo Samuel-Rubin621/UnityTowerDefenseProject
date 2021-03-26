@@ -110,7 +110,12 @@ public class Modules : MonoBehaviour
         towerPanel.SetupSlots();
     }
 
-
+    public IEnumerator MovedTower(Modules movedTower)
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log(slots.ToString() + movedTower.slots.ToString());
+        slots = movedTower.slots;
+    }
 
 
 

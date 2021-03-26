@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Overlay : MonoBehaviour
 {
+    #region Variables
     // Private variables that are changable in the editor
 
     // Private variables only changeable through script
@@ -14,30 +15,34 @@ public class Overlay : MonoBehaviour
 
     // Public variables
     public int towerCost;
+    public int movementCost;
     public bool bBuyingTower;
 
     // Reference variables
     private Camera camera;
+    private TowerPanel towerPanel;
 
     // Prefab variables
     [SerializeField] private GameObject dummyTower;
 
     // Text variables
-    private Text Lives;
-    private Text Money;
-    private Text TowerCost;
+    private Text livesText;
+    private Text moneyText;
+    private Text towerCostText;
 
     // Button variables
-    private Button cancelButton;
-    private Button buyButton;
+    public Button cancelButton;
+    public Button buyButton;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         // Initialize references to scene objects
-        Lives = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
-        Money = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
-        TowerCost = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton/BuyButtonText").GetComponent<Text>();
+        towerPanel = GameObject.Find("TowerPanel").GetComponent<TowerPanel>();
+        livesText = GameObject.Find("Overlay/OverlayHolder/LivesText").GetComponent<Text>();
+        moneyText = GameObject.Find("Overlay/OverlayHolder/MoneyText").GetComponent<Text>();
+        towerCostText = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton/BuyButtonText").GetComponent<Text>();
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         cancelButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/CancelButton").GetComponent<Button>();
         buyButton = GameObject.Find("Overlay/OverlayHolder/ButtonHolder/BuyButton").GetComponent<Button>();
@@ -47,6 +52,7 @@ public class Overlay : MonoBehaviour
         playerLives = 100;
         playerMoney = 500;
         towerCost = 100;
+        movementCost = (int)(towerCost / 3);
         cancelButton.interactable = false;
         buyButton.interactable = true;
 
@@ -80,17 +86,17 @@ public class Overlay : MonoBehaviour
         }
     }
 
-    private void ToggleButtons()
+    public void ToggleButtons()
     {
-        if (bBuyingTower) { cancelButton.interactable = true; buyButton.interactable = false; }
+        if (bBuyingTower || towerPanel.bMovingTower) { cancelButton.interactable = true; buyButton.interactable = false; }
         else { cancelButton.interactable = false; buyButton.interactable = true; }
     }
 
     private void UpdateText()
     {
-        Lives.text = "Lives: " + playerLives.ToString();
-        Money.text = "Money: " + playerMoney.ToString();
-        TowerCost.text = "Buy Tower: " + towerCost.ToString();
+        livesText.text = "Lives: " + playerLives.ToString();
+        moneyText.text = "Money: " + playerMoney.ToString();
+        towerCostText.text = "Buy Tower: " + towerCost.ToString();
     }
     #endregion
 
@@ -123,9 +129,10 @@ public class Overlay : MonoBehaviour
 
     #region Tower Creation
     // Mothods used when creating new towers to validate placement
-    public void IncreaseTowerCost()
+    public void IncreaseCost()
     {
-        towerCost = (int)(towerCost * 1.2);
+        towerCost = (int)(towerCost * 1.33);
+        movementCost = (int)(towerCost / 3);
         UpdateText();
     }
 
@@ -135,9 +142,9 @@ public class Overlay : MonoBehaviour
         UpdateText();
     }
 
-    public bool CheckMoney()
+    public bool CheckMoney(int cost)
     {
-        if (playerMoney >= towerCost) return true;
+        if (playerMoney >= cost) return true;
         else return false;
     }
     #endregion
