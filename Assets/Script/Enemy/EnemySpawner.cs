@@ -25,14 +25,14 @@ public class EnemySpawner : MonoBehaviour
     // Prefab variables
 
     // Enemy variation prefabs
-    [SerializeField] private GameObject Soldier;
-    [SerializeField] private GameObject Corporal;
-    [SerializeField] private GameObject Sergeant;
-    [SerializeField] private GameObject Lieutenant;
-    [SerializeField] private GameObject Colonel;
-    [SerializeField] private GameObject General;
-    [SerializeField] private GameObject Great_General;
-    [SerializeField] private GameObject Master_General;
+    [SerializeField] private GameObject soldier;
+    [SerializeField] private GameObject corporal;
+    [SerializeField] private GameObject sergeant;
+    [SerializeField] private GameObject lieutenant;
+    [SerializeField] private GameObject colonel;
+    [SerializeField] private GameObject general;
+    [SerializeField] private GameObject greatGeneral;
+    [SerializeField] private GameObject masterGeneral;
 
     // Reference variables
     private Overlay overlay;
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         overlay = GameObject.Find("Overlay").GetComponent<Overlay>();
         roundSpawning = GameObject.Find("GameManager").GetComponent<RoundSpawning>();
 
-        lowestEnemyStrength = Soldier.GetComponent<Soldier>().EnemyStrength;
+        lowestEnemyStrength = soldier.GetComponent<DefaultEnemy>().EnemyStrength;
         Invoke("PreloadRound", 0.1f);
     }
 
@@ -66,12 +66,16 @@ public class EnemySpawner : MonoBehaviour
             EnemiesToSpawn.Clear();
         }
 
+        //Debug.Log("Lowest enemy strength is " + lowestEnemyStrength.ToString());
         RoundBudget = roundSpawning.RoundBudget;
-        Round = roundSpawning.Round;/*
+        Round = roundSpawning.Round;
+
+        // Secondary spawning method - not in use
+        /*
         while (RoundBudget >= lowestEnemyStrength)
         {
             float randomEnemy = Random.Range(0.0f, 100.0f);
-            
+
             // Soldier
             if ((randomEnemy >= 0.0) && (randomEnemy <= 40.0f) && (RoundBudget >= Soldier.GetComponent<Soldier>().EnemyStrength))
             {
@@ -85,7 +89,7 @@ public class EnemySpawner : MonoBehaviour
                 RoundBudget -= Corporal.GetComponent<Corporal>().EnemyStrength;
             }
             // Sergeant
-            else if ((randomEnemy > 7.0f) && (randomEnemy <= 80.0f) && (RoundBudget >= Sergeant.GetComponent<Sergeant>().EnemyStrength) && Round > 3)
+            else if ((randomEnemy > 70.0f) && (randomEnemy <= 80.0f) && (RoundBudget >= Sergeant.GetComponent<Sergeant>().EnemyStrength) && Round > 3)
             {
                 EnemiesToSpawn.Add(Sergeant);
                 RoundBudget -= Sergeant.GetComponent<Sergeant>().EnemyStrength;
@@ -125,66 +129,74 @@ public class EnemySpawner : MonoBehaviour
         while (RoundBudget >= lowestEnemyStrength)
         {
             // Soldier
-            if (Random.Range(0, 101) > 85 && (RoundBudget >= Soldier.GetComponent<Soldier>().EnemyStrength))
+            if (Random.Range(0, 101) > 85 && (RoundBudget >= soldier.GetComponent<DefaultEnemy>().EnemyStrength))
             {
-                EnemiesToSpawn.Add(Soldier);
-                RoundBudget -= Soldier.GetComponent<Soldier>().EnemyStrength;
+                //Debug.Log("Soldier: Decreasing budget by " + soldier.EnemyStrength.ToString());
+                EnemiesToSpawn.Add(soldier);
+                RoundBudget -= soldier.GetComponent<DefaultEnemy>().EnemyStrength;
             }
             else
             {
                 // Corporal
-                if (Random.Range(0, 101) > 85 && (RoundBudget >= Corporal.GetComponent<Corporal>().EnemyStrength))
+                if (Random.Range(0, 101) > 85 && (RoundBudget >= corporal.GetComponent<DefaultEnemy>().EnemyStrength))
                 {
-                    EnemiesToSpawn.Add(Corporal);
-                    RoundBudget -= Corporal.GetComponent<Corporal>().EnemyStrength;
+                    //Debug.Log("Corporal: Decreasing budget by " + corporal.EnemyStrength.ToString());
+                    EnemiesToSpawn.Add(corporal);
+                    RoundBudget -= corporal.GetComponent<DefaultEnemy>().EnemyStrength;
                 }
                 else
                 {
                     // Sergeant
-                    if (Random.Range(0, 101) > 85 && (RoundBudget >= Sergeant.GetComponent<Sergeant>().EnemyStrength))
+                    if (Random.Range(0, 101) > 85 && (RoundBudget >= sergeant.GetComponent<DefaultEnemy>().EnemyStrength))
                     {
-                        EnemiesToSpawn.Add(Sergeant);
-                        RoundBudget -= Sergeant.GetComponent<Sergeant>().EnemyStrength;
+                        //Debug.Log("Sergeant: Decreasing budget by " + sergeant.GetComponent<Sergeant>().EnemyStrength.ToString());
+                        EnemiesToSpawn.Add(sergeant);
+                        RoundBudget -= sergeant.GetComponent<DefaultEnemy>().EnemyStrength;
                     }
                     else
                     {
                         // Lieutenant
-                        if (Random.Range(0, 101) > 85 && (RoundBudget >= Lieutenant.GetComponent<Lieutenant>().EnemyStrength))
+                        if (Random.Range(0, 101) > 85 && (RoundBudget >= lieutenant.GetComponent<DefaultEnemy>().EnemyStrength))
                         {
-                            EnemiesToSpawn.Add(Lieutenant);
-                            RoundBudget -= Lieutenant.GetComponent<Lieutenant>().EnemyStrength;
+                            //Debug.Log("Lieutenant: Decreasing budget by " + lieutenant.GetComponent<Lieutenant>().EnemyStrength.ToString());
+                            EnemiesToSpawn.Add(lieutenant);
+                            RoundBudget -= lieutenant.GetComponent<DefaultEnemy>().EnemyStrength;
                         }
                         else
                         {
                             // Colonel
-                            if (Random.Range(0, 101) > 85 && (RoundBudget >= Colonel.GetComponent<Colonel>().EnemyStrength))
+                            if (Random.Range(0, 101) > 85 && (RoundBudget >= colonel.GetComponent<DefaultEnemy>().EnemyStrength))
                             {
-                                EnemiesToSpawn.Add(Colonel);
-                                RoundBudget -= Colonel.GetComponent<Colonel>().EnemyStrength;
+                                //Debug.Log("Colonel: Decreasing budget by " + colonel.GetComponent<Colonel>().EnemyStrength.ToString());
+                                EnemiesToSpawn.Add(colonel);
+                                RoundBudget -= colonel.GetComponent<DefaultEnemy>().EnemyStrength;
                             }
                             else
                             {
                                 // General
-                                if (Random.Range(0, 101) > 85 && (RoundBudget >= General.GetComponent<General>().EnemyStrength))
+                                if (Random.Range(0, 101) > 85 && (RoundBudget >= general.GetComponent<DefaultEnemy>().EnemyStrength))
                                 {
-                                    EnemiesToSpawn.Add(General);
-                                    RoundBudget -= General.GetComponent<General>().EnemyStrength;
+                                    //Debug.Log("General: Decreasing budget by " + general.GetComponent<General>().EnemyStrength.ToString());
+                                    EnemiesToSpawn.Add(general);
+                                    RoundBudget -= general.GetComponent<DefaultEnemy>().EnemyStrength;
                                 }
                                 else
                                 {
                                     // Great General
-                                    if (Random.Range(0, 101) > 85 && (RoundBudget >= Great_General.GetComponent<Great_General>().EnemyStrength))
+                                    if (Random.Range(0, 101) > 85 && (RoundBudget >= greatGeneral.GetComponent<DefaultEnemy>().EnemyStrength))
                                     {
-                                        EnemiesToSpawn.Add(Great_General);
-                                        RoundBudget -= Great_General.GetComponent<Great_General>().EnemyStrength;
+                                        //Debug.Log("Great_General: Decreasing budget by " + greatGeneral.GetComponent<Great_General>().EnemyStrength.ToString());
+                                        EnemiesToSpawn.Add(greatGeneral);
+                                        RoundBudget -= greatGeneral.GetComponent<DefaultEnemy>().EnemyStrength;
                                     }
                                     else
                                     {
                                         // Master General
-                                        if (Random.Range(0, 101) > 85 && (RoundBudget >= Master_General.GetComponent<Master_General>().EnemyStrength))
+                                        if (Random.Range(0, 101) > 85 && (RoundBudget >= masterGeneral.GetComponent<DefaultEnemy>().EnemyStrength))
                                         {
-                                            EnemiesToSpawn.Add(Master_General);
-                                            RoundBudget -= Master_General.GetComponent<Master_General>().EnemyStrength;
+                                            //Debug.Log("Master_General: Decreasing budget by " + masterGeneral.GetComponent<Master_General>().EnemyStrength.ToString());
+                                            EnemiesToSpawn.Add(masterGeneral);
+                                            RoundBudget -= masterGeneral.GetComponent<DefaultEnemy>().EnemyStrength;
                                         }
                                     }
                                 }
@@ -199,7 +211,7 @@ public class EnemySpawner : MonoBehaviour
     public void RoundStart()
     {
         bDoneSpawning = false;
-        Spawn();
+        Invoke("Spawn", 5.0f);
     }
 
     void Spawn()

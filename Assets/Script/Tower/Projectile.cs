@@ -9,18 +9,22 @@ public class Projectile : MonoBehaviour
     // Private variables only changeable through script
 
     // Public variables
-    public float projectileSpeed;
-    public float projectileDamage;
+    private float projectileSpeed;
+    private float projectilePhysicalDamage;
+    private float projectileFireDamage;
 
     // Reference variables
-    public GameObject tower;
+    public Tower tower;
 
     // Prefab variables
 
     // Start is called before the first frame update
     void Start()
     {
-
+        tower = this.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Tower>();
+        projectileSpeed = tower.ProjectileSpeed;
+        projectilePhysicalDamage = tower.ProjectilePhysicalDamage;
+        projectileFireDamage = tower.ProjectileFireDamage;
     }
 
     // Update is called once per frame
@@ -33,14 +37,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            if (collision.GetComponent<DefaultEnemy>() is Soldier) { collision.GetComponent<Soldier>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Corporal) { collision.GetComponent<Corporal>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Sergeant) { collision.GetComponent<Sergeant>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Lieutenant) { collision.GetComponent<Lieutenant>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Colonel) { collision.GetComponent<Colonel>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is General) { collision.GetComponent<General>().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Great_General) { collision.GetComponent<Great_General> ().TakeDamage(projectileDamage); }
-            else if (collision.GetComponent<DefaultEnemy>() is Master_General) { collision.GetComponent<Master_General>().TakeDamage(projectileDamage); }
+            collision.GetComponent<DefaultEnemy>().TakeDamage(projectilePhysicalDamage, projectileFireDamage);
 
             Destroy(gameObject);
         }

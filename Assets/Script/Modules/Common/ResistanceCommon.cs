@@ -7,8 +7,7 @@ public class ResistanceCommon : MonoBehaviour, IAddModule
 {
     private Tower towerReference;
     private GameObject inventoryPanel;
-    private float increasePhysicalResistancePercent;
-    private float increasePhysicalResistancePoints;
+    private float changeValue;
     private string textDetails;
     private Button moduleButton;
 
@@ -20,20 +19,8 @@ public class ResistanceCommon : MonoBehaviour, IAddModule
     {
         InventoryPanel = GameObject.Find("Overlay/InventoryPanel");
 
-        int chooseModifier = Random.Range(0, 2);
-        switch (chooseModifier)
-        {
-            case 0:
-                increasePhysicalResistancePercent = 15.0f;
-                increasePhysicalResistancePoints = 0.0f;
-                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePercent.ToString() + "%.";
-                break;
-            case 1:
-                increasePhysicalResistancePoints = 5.0f;
-                increasePhysicalResistancePercent = 0.0f;
-                textDetails = "This module will increase the resistance to physical damage of the tower by " + increasePhysicalResistancePoints.ToString() + " points.";
-                break;
-        }
+        changeValue = 5.0f;
+        textDetails = "This module will increase the resistance to physical damage of the tower by " + changeValue.ToString() + " points.";
     }
 
     public void Select()
@@ -44,7 +31,13 @@ public class ResistanceCommon : MonoBehaviour, IAddModule
 
     public IEnumerator AddModuleToTower(Tower tower)
     {
-        tower.PhysicalDamageResistance = tower.PhysicalDamageResistance + (tower.PhysicalDamageResistance * increasePhysicalResistancePercent * 0.01f) + increasePhysicalResistancePoints;
+        tower.PhysicalDamageResistance += changeValue;
+        yield return null;
+    }
+
+    public IEnumerator RemoveModuleFromTower(Tower tower)
+    {
+        tower.PhysicalDamageResistance -= changeValue;
         yield return null;
     }
 }

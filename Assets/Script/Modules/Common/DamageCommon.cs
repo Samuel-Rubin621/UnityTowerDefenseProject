@@ -7,8 +7,7 @@ public class DamageCommon : MonoBehaviour, IAddModule
 {
     private Tower towerReference;
     private GameObject inventoryPanel;
-    private float increaseDamageValue;
-    private float increaseDamagePercent;
+    private float changeValue;
     private string textDetails;
     private Button moduleButton;
 
@@ -20,20 +19,8 @@ public class DamageCommon : MonoBehaviour, IAddModule
     {
         InventoryPanel = GameObject.Find("Overlay/InventoryPanel");
 
-        int chooseModifier = Random.Range(0, 2);
-        switch (chooseModifier)
-        {
-            case 0:
-                increaseDamagePercent = 5.0f;
-                increaseDamageValue = 0.0f;
-                textDetails = "This module will increase the damage of the tower by " + increaseDamagePercent.ToString() + "%.";
-                break;
-            case 1:
-                increaseDamageValue = 2.0f;
-                increaseDamagePercent = 0.0f;
-                textDetails = "This module will increase the damage of the tower by " + increaseDamageValue.ToString() + " points.";
-                break;
-        }
+        changeValue = 2.0f;
+        textDetails = "This module will increase the damage of the tower by " + changeValue.ToString() + " points.";
     }
 
     public void Select()
@@ -44,7 +31,13 @@ public class DamageCommon : MonoBehaviour, IAddModule
 
     public IEnumerator AddModuleToTower(Tower tower)
     {
-        tower.ProjectilePhysicalDamage = tower.ProjectilePhysicalDamage + (tower.ProjectilePhysicalDamage * increaseDamagePercent * 0.01f) + increaseDamageValue;
+        tower.ProjectilePhysicalDamage += changeValue;
+        yield return null;
+    }
+
+    public IEnumerator RemoveModuleFromTower(Tower tower)
+    {
+        tower.ProjectilePhysicalDamage -= changeValue;
         yield return null;
     }
 }

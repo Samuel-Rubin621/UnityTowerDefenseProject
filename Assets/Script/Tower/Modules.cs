@@ -29,78 +29,43 @@ public class Modules : MonoBehaviour
         tower = GetComponent<Tower>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddModule(GameObject module, int slot)
     {
         switch (slot)
         {
             case 1:
-                for (int i = 0; i < moduleList.Count; i++)
+                if (slots[0] != defaultSlot)
                 {
-                    if (moduleList[i] == slots[0])
-                    {
-                        moduleList.RemoveAt(i);
-                        break;
-                    }
+                    StartCoroutine(slots[0].GetComponent<IAddModule>().RemoveModuleFromTower(tower));
                 }
                 slots[0] = module;
-                moduleList.Add(slots[0]);
+                StartCoroutine(slots[0].GetComponent<IAddModule>().AddModuleToTower(tower));
                 break;
             case 2:
-                for (int i = 0; i < moduleList.Count; i++)
+                if (slots[1] != defaultSlot)
                 {
-                    if (moduleList[i] == slots[1])
-                    {
-                        moduleList.RemoveAt(i);
-                        break;
-                    }
+                    StartCoroutine(slots[1].GetComponent<IAddModule>().RemoveModuleFromTower(tower));
                 }
                 slots[1] = module;
-                moduleList.Add(slots[1]);
+                StartCoroutine(slots[1].GetComponent<IAddModule>().AddModuleToTower(tower));
                 break;
             case 3:
-                for (int i = 0; i < moduleList.Count; i++)
+                if (slots[2] != defaultSlot)
                 {
-                    if (moduleList[i] == slots[2])
-                    {
-                        moduleList.RemoveAt(i);
-                        break;
-                    }
+                    StartCoroutine(slots[2].GetComponent<IAddModule>().RemoveModuleFromTower(tower));
                 }
                 slots[2] = module;
-                moduleList.Add(slots[2]);
+                StartCoroutine(slots[2].GetComponent<IAddModule>().AddModuleToTower(tower));
                 break;
             case 4:
-                for (int i = 0; i < moduleList.Count; i++)
+                if (slots[3] != defaultSlot)
                 {
-                    if (moduleList[i] == slots[3])
-                    {
-                        moduleList.RemoveAt(i);
-                        break;
-                    }
+                    StartCoroutine(slots[3].GetComponent<IAddModule>().RemoveModuleFromTower(tower));
                 }
                 slots[3] = module;
-                moduleList.Add(slots[3]);
+                StartCoroutine(slots[3].GetComponent<IAddModule>().AddModuleToTower(tower));
                 break;
         }
-
-        ApplyModule();
-    }
-
-    private void ApplyModule()
-    {
-        StartCoroutine(tower.ResetTower());
-
-        foreach (GameObject module in moduleList)
-        {
-            StartCoroutine(module.GetComponent<IAddModule>().AddModuleToTower(tower));
-        }
-
         UpdateTowerPanel();
     }
 

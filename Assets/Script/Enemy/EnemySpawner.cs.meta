@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Soldier: {fileID: 638931607951271430, guid: abe041ff8b4e5f54799c87e068e9c63a,
+  - soldier: {fileID: 3429883928764107318, guid: abe041ff8b4e5f54799c87e068e9c63a,
       type: 3}
   - Corporal: {fileID: 638931607951271430, guid: e1ea08b50672d5a46bed07b115be41b8,
       type: 3}

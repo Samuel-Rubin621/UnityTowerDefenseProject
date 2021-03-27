@@ -47,17 +47,17 @@ public class TowerPanel : MonoBehaviour
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         // Get all text info
-        FireRateText = transform.Find("TowerStatsDisplayer/FireRateText").GetComponent<Text>();
-        DamageText = transform.Find("TowerStatsDisplayer/DamageText").GetComponent<Text>();
-        FireDamageText = transform.Find("TowerStatsDisplayer/FireDamageText").GetComponent<Text>();
-        ResistanceText = transform.Find("TowerStatsDisplayer/ResistanceText").GetComponent<Text>();
-        FireResistanceText = transform.Find("TowerStatsDisplayer/FireResistanceText").GetComponent<Text>();
+        FireRateText = transform.Find("RightSide/FireRateText").GetComponent<Text>();
+        DamageText = transform.Find("RightSide/DamageText").GetComponent<Text>();
+        FireDamageText = transform.Find("RightSide/FireDamageText").GetComponent<Text>();
+        ResistanceText = transform.Find("RightSide/ResistanceText").GetComponent<Text>();
+        FireResistanceText = transform.Find("RightSide/FireResistanceText").GetComponent<Text>();
 
         // Get all module info
-        module1 = transform.Find("Module1").GetComponent<Image>();
-        module2 = transform.Find("Module2").GetComponent<Image>();
-        module3 = transform.Find("Module3").GetComponent<Image>();
-        module4 = transform.Find("Module4").GetComponent<Image>();
+        module1 = transform.Find("LeftSide/TopLeft/Module1").GetComponent<Image>();
+        module2 = transform.Find("LeftSide/TopLeft/Module2").GetComponent<Image>();
+        module3 = transform.Find("LeftSide/MiddleLeft/Module3").GetComponent<Image>();
+        module4 = transform.Find("LeftSide/MiddleLeft/Module4").GetComponent<Image>();
 
         position = GetComponent<RectTransform>();
         Invoke("MoveOffScreen", 0.0001f) ;

@@ -8,9 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3329500190849563813}
+  - component: {fileID: 1245102664903287972}
   - component: {fileID: 4748414737351577729}
   - component: {fileID: -3815371126202961261}
+  - component: {fileID: 7443238559808798356}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: EnemySpawner
@@ -18,7 +19,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3329500190849563813
+--- !u!4 &1245102664903287972
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,14 +95,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d222aba5e7468f743922a8f5384a8a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Soldier: {fileID: 638931607951271430, guid: abe041ff8b4e5f54799c87e068e9c63a, type: 3}
-  Corporal: {fileID: 638931607951271430, guid: 58d523cf9951b5843b43eadbc4a7ae43, type: 3}
-  Sergeant: {fileID: 638931607951271430, guid: 3fa6f608a8316bf4bb2fd47a506cdc32, type: 3}
-  Lieutenant: {fileID: 638931607951271430, guid: c69816014b5eaa645aedb82d4ff04203,
+  soldier: {fileID: 638931607951271430, guid: abe041ff8b4e5f54799c87e068e9c63a, type: 3}
+  corporal: {fileID: 638931607951271430, guid: e1ea08b50672d5a46bed07b115be41b8, type: 3}
+  sergeant: {fileID: 638931607951271430, guid: 3fa6f608a8316bf4bb2fd47a506cdc32, type: 3}
+  lieutenant: {fileID: 638931607951271430, guid: c69816014b5eaa645aedb82d4ff04203,
     type: 3}
-  Colonel: {fileID: 638931607951271430, guid: 81b97785f8d91b24f90b3c40b674cc75, type: 3}
-  General: {fileID: 638931607951271430, guid: 43c5440e02fe80846b0ff34845f25daf, type: 3}
-  Great_General: {fileID: 638931607951271430, guid: da87cc6b997cec4459ffada27b93368e,
+  colonel: {fileID: 638931607951271430, guid: 81b97785f8d91b24f90b3c40b674cc75, type: 3}
+  general: {fileID: 638931607951271430, guid: 43c5440e02fe80846b0ff34845f25daf, type: 3}
+  greatGeneral: {fileID: 638931607951271430, guid: da87cc6b997cec4459ffada27b93368e,
     type: 3}
-  Master_General: {fileID: 638931607951271430, guid: a7c538e20e2cbef4db5a15a3cac669d4,
+  masterGeneral: {fileID: 638931607951271430, guid: a7c538e20e2cbef4db5a15a3cac669d4,
     type: 3}
+--- !u!222 &7443238559808798356
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421194404356174575}
+  m_CullTransparentMesh: 0
