@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc8609591779f2429a6b8480eeff597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 2
+  baseHealth: 50
   baseFireRate: 1.5
   baseProjectileSpeed: 500
   basePhysicalDamage: 1

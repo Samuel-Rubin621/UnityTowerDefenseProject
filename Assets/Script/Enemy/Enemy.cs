@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultEnemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IDamageable
 {
     #region Variables
     // Variables for storing probabilities of spawning a drop

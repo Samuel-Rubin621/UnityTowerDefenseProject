@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<DefaultEnemy>().TakeDamage(projectilePhysicalDamage, projectileFireDamage);
+            collision.GetComponent<Enemy>().TakeDamage(projectilePhysicalDamage, projectileFireDamage);
 
             Destroy(gameObject);
         }

@@ -8,7 +8,7 @@ public class ShieldGenerator : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<DefaultEnemy>().ReachedGenerator();
+            collision.gameObject.GetComponent<Enemy>().ReachedGenerator();
         }
     }
 }
